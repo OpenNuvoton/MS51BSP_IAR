@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 read UID demo
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
 void main(void)
@@ -22,11 +22,10 @@ void main(void)
     
 /* Read UID*/
   Read_UID();
-  printf_UART("\n UID = ");
+  printf(" \n\r  UID = ");
   for(READ1=0;READ1<12;READ1++)
   {
-    printf_UART(" 0x%x",UIDBuffer[READ1]);
-    _delay_();_delay_();_delay_();_delay_();
+    printf(" 0x%x",UIDBuffer[READ1]);
   }
 
   while(1);

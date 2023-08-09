@@ -10,7 +10,7 @@
 //***********************************************************************************************************
 //  File Function: ML51 UART0 ISP demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.H"
+#include "ms51_32k_iar.h"
 #include "isp_uart1.h"
 /************************************************************************************************************
 *    Main function 
@@ -26,14 +26,14 @@ void main (void)
 
   g_timer0Over=0;
   g_timer0Counter=5000;
-  g_progarmflag=0;
+  g_programflag=0;
 
 while(1)
 {
         if(bUartDataReady == TRUE)
         {
           EA=0; //DISABLE ALL INTERRUPT                  
-          if(g_progarmflag==1)
+          if(g_programflag==1)
           {
             for(count=8;count<64;count++)
             {
@@ -55,7 +55,7 @@ while(1)
   
               if(flash_address==AP_size)
               {
-                g_progarmflag=0;
+                g_programflag=0;
                  goto END_2;          
               }
             } 
@@ -204,7 +204,7 @@ END_2:
               AP_size=0;
               AP_size=uart_rcvbuf[12];
               AP_size|=(uart_rcvbuf[13]<<8);  
-              g_progarmflag=1;
+              g_programflag=1;
 
               for(count=16;count<64;count++)
               {
@@ -226,7 +226,7 @@ END_2:
                 
                 if(flash_address==AP_size)
                 {
-                  g_progarmflag=0;
+                  g_programflag=0;
                    goto END_1;          
                 }
               }

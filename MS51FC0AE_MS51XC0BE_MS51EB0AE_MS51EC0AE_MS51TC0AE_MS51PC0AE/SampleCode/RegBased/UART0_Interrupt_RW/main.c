@@ -9,7 +9,29 @@
 /***********************************************************************************************************/
 /*  File Function: MS51 UART0 receive and transmit loop test                                               */
 /***********************************************************************************************************/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
+
+#pragma vector=0x23
+__interrupt void UART0_ISR(void){
+  
+    _push_(SFRS);
+    
+      if (RI)
+    {   
+      uart0_receive_flag = 1;
+      uart0_receive_data = SBUF;
+      clr_SCON_RI;                                         // Clear RI (Receive Interrupt).
+    }
+    if  (TI)
+    {
+      if(!PRINTFG)
+      {
+          clr_SCON_TI;
+      }
+    }
+
+    _pop_(SFRS);
+}
 
 /************************************************************************************************************/
 /*  Main function                                                                                           */
@@ -33,7 +55,9 @@
     if (uart0_receive_flag)
     {
       uart0_receive_flag = 0;
+      DISABLE_UART0_INTERRUPT;
       UART_Send_Data(UART0,uart0_receive_data);
+      ENABLE_UART0_INTERRUPT;
     }
   }
 }

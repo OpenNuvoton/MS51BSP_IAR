@@ -10,7 +10,7 @@
 //  File Function: ML51 UART receive and transmit toggle out demo code
 //***********************************************************************************************************
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /**
  * @brief       UART4 TXD output demo

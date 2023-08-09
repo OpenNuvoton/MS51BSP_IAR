@@ -137,25 +137,25 @@
                 </option>
                 <option>
                     <name>RTLibraryPath</name>
-                    <state>$TOOLKIT_DIR$\LIB\CLIB\cl-pli-nsid-2h16inc.r51</state>
+                    <state>$TOOLKIT_DIR$\LIB\CLIB\cl-pli-nlxd-2h16inc.r51</state>
                 </option>
                 <option>
                     <name>Input variant</name>
                     <version>2</version>
-                    <state>5</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state>No float.</state>
+                    <state>Automatic choice of formatter.</state>
                 </option>
                 <option>
                     <name>Output variant</name>
                     <version>2</version>
-                    <state>6</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state>No float, no field width, no precision.</state>
+                    <state>Automatic choice of formatter.</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -728,7 +728,7 @@
             <archiveVersion>1</archiveVersion>
             <data>
                 <prebuild></prebuild>
-                <postbuild></postbuild>
+                <postbuild>cmd /C ""$TOOLKIT_DIR$\..\..\..\Nuvoton Tools\Nu-Link_IAR\Hex2Bin.exe" "$PROJ_DIR$\Debug\Exe\$TARGET_BNAME$.a51""</postbuild>
             </data>
         </settings>
         <settings>
@@ -752,7 +752,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>UART1_Interrupt_RW.d51</state>
+                    <state>Project_temp.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -938,7 +938,7 @@
                 </option>
                 <option>
                     <name>GenerateExtraOutput</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>XExtraOutOverride</name>
@@ -946,12 +946,12 @@
                 </option>
                 <option>
                     <name>ExtraOutputFile</name>
-                    <state>UART0_Printf.sim</state>
+                    <state>Project_temp.a51</state>
                 </option>
                 <option>
                     <name>ExtraOutputFormat</name>
                     <version>11</version>
-                    <state>60</state>
+                    <state>22</state>
                 </option>
                 <option>
                     <name>ExtraFormatVariant</name>
@@ -2231,6 +2231,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\delay.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\putchar.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\sys.c</name>

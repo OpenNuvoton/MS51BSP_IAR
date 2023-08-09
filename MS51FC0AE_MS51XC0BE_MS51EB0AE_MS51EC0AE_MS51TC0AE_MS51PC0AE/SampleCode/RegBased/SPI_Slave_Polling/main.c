@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 SPI in Slave mode demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /* For printf code only. Disable this define to reduce code size. */
 //#define print_function 

@@ -4,12 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-
-//***********************************************************************************************************
-//  File Function: MS51 ADC simple convert demo code
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
 
 unsigned char temp;
 /******************************************************************************
@@ -21,7 +17,7 @@ void main (void)
     /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n Test start ...");
 
     ENABLE_ADC_CH4;            
   /* ADC Low speed initial*/  
@@ -36,7 +32,7 @@ void main (void)
       set_ADCCON0_ADCS;                  // ADC start trig signal
       while(ADCF == 0);
       temp = ADCRH;
-      printf_UART ("\n ADCRH Value = 0x%x", temp);
+      printf ("\n ADCRH Value = 0x%x", temp);
     }
 }
 

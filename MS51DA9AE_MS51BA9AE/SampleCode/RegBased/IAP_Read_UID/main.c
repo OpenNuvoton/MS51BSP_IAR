@@ -4,31 +4,23 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-//***********************************************************************************************************
-//  File Function: MS51 read UID demo
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
-
-/* For printf code only. Disable this define to reduce code size. */
-//#define print_function 
+#include "ms51_8k_iar.h"
 
 void main(void)
 {
 
-  unsigned char READ1;
+  uint8_t READ1;
 
-    MODIFY_HIRC(HIRC_24);
-    Enable_UART0_VCOM_printf_24M_115200();
+  MODIFY_HIRC(HIRC_24);
+  Enable_UART0_VCOM_printf_24M_115200();
 
 
   Read_UID();
   
-  printf_UART("\n UID = ");
+  printf("\n\r UID = ");
   for(READ1=0;READ1<12;READ1++)
   {
-    printf_UART(" 0x%x",UIDBuffer[READ1]);
-    _delay_();_delay_();_delay_();_delay_();
+    printf(" 0x%x",UIDBuffer[READ1]);
   }
   
   while(1);

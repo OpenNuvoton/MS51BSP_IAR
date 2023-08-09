@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 GPIO toggle demo code
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 __no_init unsigned char __data temp @ 0x08;
 __no_init unsigned char __idata itemp @ 0x90;
@@ -21,16 +16,16 @@ void main (void)
     /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
     
   ALL_GPIO_QUASI_MODE;
-  P12_PUSHPULL_MODE;
+  GPIO_LED_QUASI_MODE;
   P13_INPUT_MODE;
   
   while(1)
   {
     P1 = ~P1;
-    P30 ^= 1;
+    GPIO_LED ^= 1;
     P1 |= SET_BIT2;    
     if (!(P1&SET_BIT3)) 
     {

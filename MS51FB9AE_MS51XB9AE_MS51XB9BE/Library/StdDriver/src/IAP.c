@@ -4,13 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_16k_iar.h"
 
-/************************************************************************************************************
-  Website: http://www.nuvoton.com
-  E-Mail : MicroC-8bit@nuvoton.com
-************************************************************************************************************/
-
-#include "MS51_16K_IAR.H"
 unsigned char __xdata DIDBuffer[2];
 unsigned char __xdata PIDBuffer[2];
 unsigned char __xdata UIDBuffer[12];

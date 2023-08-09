@@ -10,7 +10,7 @@
 //  File Function: ML51 series ADC continue mode demo code
 //***********************************************************************************************************
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 unsigned char __xdata ResultTable[256];
 unsigned char ADC_CONT_FINAL_FLAG=0;
@@ -47,10 +47,9 @@ void main (void)
   * include uart.c in Library for UART initial setting
 */
     MODIFY_HIRC(HIRC_24);
-    P06_PUSHPULL_MODE;
-    UART_Open(24000000,UART0_Timer3,115200);
-    ENABLE_UART0_PRINTF;
-  
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf (" \n\r Test start ... \n\r ");
+    
 /*loop clear XRAM area . */   
     for (i=0;i<192;i++)
     {
@@ -80,12 +79,12 @@ void main (void)
             {
               temp=(ResultTable[i]<<4)+(ResultTable[i/2+128]&0x0F);
               SFRS = 0;
-              printf_UART("\n ADC No.%BD",i);
-              printf_UART(" = 0x%x ", temp);
+              printf(" \n\r  ADC No.%BD",i);
+              printf(" = 0x%x ", temp);
               i++;
               temp=(ResultTable[i]<<4)+((ResultTable[(i-1)/2+128]>>4)&0x0F);
-              printf_UART("\n ADC No.%BD",i);
-              printf_UART(" = 0x%x ", temp);
+              printf(" \n\r  ADC No.%BD",i);
+              printf(" = 0x%x ", temp);
               if(i==127)
               ADC_CONT_FINAL_FLAG=0;
             }

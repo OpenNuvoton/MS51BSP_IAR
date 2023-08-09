@@ -4,11 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-/************************************************************************************************************/
-/*  File Function: MS51 Timer 2 capture function demo                                                       */
-//***********************************************************************************************************/
-#include "MS51_8K_IAR.h"
 
 /************************************************************************************************************/
 /*    Capture interrupt subroutine                                                                   */
@@ -18,8 +15,9 @@ __interrupt void Capture_ISR (void){
   
     _push_(SFRS);
   
-    clr_CAPCON0_CAPF2;                  /* clear capture0 interrupt flag  */
+    clr_CAPCON0_CAPF2;            // clear capture0 interrupt flag
     clr_T2CON_TF2;
+    GPIO_LED ^= 1;                // LEDR1 toggle when interrupt 
 
     _pop_(SFRS);
 }
@@ -29,6 +27,7 @@ __interrupt void Capture_ISR (void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
     
     P00_QUASI_MODE;
     P00 = 1;

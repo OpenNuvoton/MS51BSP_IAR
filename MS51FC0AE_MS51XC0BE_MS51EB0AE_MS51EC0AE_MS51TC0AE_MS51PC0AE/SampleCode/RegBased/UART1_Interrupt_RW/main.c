@@ -9,15 +9,35 @@
 /************************************************************************************************************/
 /*  File Function: MS51 UART1 with interrupt demo                                                           */
 /************************************************************************************************************/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
+#pragma vector=0x7B
+__interrupt void SerialPort1_ISR(void){
+    _push_(SFRS);
+  
+    if (RI_1==1) 
+    {                                       
+        clr_SCON_1_RI_1;                            
+       uart1_receive_data = SBUF_1;
+        uart1_receive_flag =1;
+    }
+    if(TI_1==1)
+    {
+       if(!PRINTFG)
+      {
+          clr_SCON_1_TI_1;                            
+      }  
+    }
+
+    _pop_(SFRS);
+}
 /****************************************************************************************************************
  * FUNCTION_PURPOSE: Main function 
  !!! MS51_8K UART1 pin also occupied by debug pin, 
  please remove Nu-link or not in debug mode to test UART1 function.
  External UART1 connect also disturb debug download
  ***************************************************************************************************************/
-
+
 #define   UART1_P36_P37      /* This define UART1 pin assign*/
 
 void main (void)

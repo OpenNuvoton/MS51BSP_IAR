@@ -6,7 +6,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /**
  * @brief       PWM indepedent mode PWM0 channel 0~5 output demo

@@ -4,13 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 Timer 0 mode 3 demo
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
-
+#include "ms51_16k_iar.h"
 
 /* if default 16MHz                                                     */
 /* if define TIMER0_FSYS_DIV12, Timer0 = (256-56)*12/16MHz = 150us ,    */
@@ -33,7 +27,8 @@
 __interrupt void Timer0_ISR(void){
 
     _push_(SFRS);
-                
+
+    SFRS = 0;
     TL0 = TL0_INIT;                              
     TF0=0;
 
@@ -44,7 +39,8 @@ __interrupt void Timer0_ISR(void){
 __interrupt void Timer1_ISR(void){
   
     _push_(SFRS);
-                
+
+    SFRS = 0;
     TH0 = TH0_INIT;
     TF1=0;
 
@@ -57,6 +53,9 @@ __interrupt void Timer1_ISR(void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf ("\n\r Test start ...\n\r");
     
     ENABLE_TIMER0_MODE3;
     TIMER0_FSYS_DIV12;

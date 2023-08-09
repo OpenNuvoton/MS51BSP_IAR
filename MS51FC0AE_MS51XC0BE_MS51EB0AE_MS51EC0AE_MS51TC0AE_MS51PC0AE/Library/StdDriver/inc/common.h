@@ -1,4 +1,6 @@
-
+#define  GPIO_LED     P35
+#define  GPIO_LED_QUASI_MODE     P35_QUASI_MODE
+#define  GPIO_PRINTF  P06
 
 extern BIT BIT_TMP;
 

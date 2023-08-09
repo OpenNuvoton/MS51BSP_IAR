@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 ADC PWM trig convert demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /******************************************************************************
  * FUNCTION_PURPOSE: ADC interrupt Service Routine
@@ -29,6 +29,8 @@ here after stack initialization.
 ******************************************************************************/
 void main (void) 
 {
+    MODIFY_HIRC(HIRC_24);
+      
     ALL_GPIO_QUASI_MODE;
 
 /*-------------------------------------------------
@@ -70,7 +72,7 @@ void main (void)
     set_PWM0CON0_LOAD;                                    // PWM run
     set_PWM0CON0_PWM0RUN;
 // Setting ADC
-    set_IE_EADC;                                    // Enable ADC interrupt (if use interrupt)
+    ENABLE_ADC_INTERRUPT;                                    // Enable ADC interrupt (if use interrupt)
     ENABLE_GLOBAL_INTERRUPT;  
     while(1);
 

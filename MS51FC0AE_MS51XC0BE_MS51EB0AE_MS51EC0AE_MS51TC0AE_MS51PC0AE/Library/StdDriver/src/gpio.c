@@ -4,8 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-#include "ML51.h"
+#include "ms51_32k_iar.h"
 
  /**
   * @brief GPIO Pull up or Pull down enable setting

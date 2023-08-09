@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-/************************************************************************************************************/
-/*  File Function: MS51 Timer 2 capture function demo                                                       */
-//***********************************************************************************************************/
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 BIT captureflag;
 UINT8  capLowByte,capHighByte;
@@ -37,7 +32,7 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
     
     P04_QUASI_MODE;
     P04 = 0;
@@ -54,7 +49,7 @@ void main (void)
     {
       if (captureflag)
       {
-        printf_UART ("\n Capture low byte value = 0x%x",capLowByte);
+        printf (" \n\r  Capture low byte value = 0x%x",capLowByte);
         captureflag = 0;
       }
     }

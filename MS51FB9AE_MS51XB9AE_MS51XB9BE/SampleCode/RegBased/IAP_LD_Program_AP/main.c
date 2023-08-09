@@ -4,13 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-
-//***********************************************************************************************************
-//  File Function: MS51 LDROM program APROM demo code
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 //***********************************************************************************************************
 //  Before using this demo code, please remind below CONFOGs setting, thanks.
@@ -21,12 +15,17 @@
 void main (void) 
 {
     unsigned char i;
-    P12_QUASI_MODE;
+    
+    MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf ("\n\r Test start ...\n\r");
+    
     for(i=0;i<128;i++)
     {
       IAPDataBuf[i]=i;
     }
-    while (P12);
+    while (GPIO_LED);
     Erase_APROM(0x80,128);
     Erase_Verify_APROM(0x80,128);
     Program_APROM(0x80,128);

@@ -9,10 +9,9 @@
 //***********************************************************************************************************
 //  File Function: ML56 ADC multi channel input demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /* IMPORTANT !! This define for printf code only. Disable this define to reduce code size. */
-#define print_function
 
 unsigned int __xdata ADCdataAIN5;
 unsigned int __xdata ADCdataVBG;
@@ -25,9 +24,7 @@ void main (void)
 {
     unsigned char i;
     MODIFY_HIRC(HIRC_24);
-#ifdef print_function
     Enable_UART0_VCOM_printf_24M_115200();
-#endif
 
   /*Enable channel 5 */ 
       ENABLE_ADC_CH5;
@@ -40,13 +37,13 @@ void main (void)
       ADCdataAIN5 = (ADCRH<<4);
       ADCdataAIN5 |= (ADCRL&0x0F);
       DISABLE_ADC;
- #ifdef print_function
+
   /*printf must in SFR page 0 */
      _push_(SFRS);
      SFRS = 0;
-     printf_UART("\n ADC channel 5 = %x", ADCdataAIN5);
+     printf(" \n\r  ADC channel 5 = %x", ADCdataAIN5);
     _pop_(SFRS);
-#endif
+
 
   /*Enable Bandgap */
       ENABLE_ADC_BANDGAP;
@@ -62,13 +59,11 @@ void main (void)
       ADCdataVBG = (ADCRH<<4);
       ADCdataVBG |= (ADCRL&0x0F);
 
-#ifdef print_function
   /*printf must in SFR page 0 */
      _push_(SFRS);
      SFRS = 0;
-     printf_UART("\n ADC channel bandgap = %x", ADCdataVBG);
+     printf(" \n\r  ADC channel bandgap = %x", ADCdataVBG);
     _pop_(SFRS);
-#endif
 
     while(1);
 }

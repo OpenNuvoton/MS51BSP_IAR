@@ -4,8 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_32k_iar.h"
 
-#include "MS51_32K_IAR.h"
 volatile unsigned char __xdata page_buffer[128];
 volatile  unsigned char __xdata xd_tmp[128];
   

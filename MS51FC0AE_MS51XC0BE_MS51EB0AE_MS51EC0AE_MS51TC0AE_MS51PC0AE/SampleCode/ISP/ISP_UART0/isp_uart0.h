@@ -39,7 +39,7 @@ extern __data volatile uint8_t bUartDataReady;
 extern __data volatile uint8_t g_timer0Over;
 extern __data volatile uint8_t g_timer1Over;
 extern __data volatile uint8_t g_programflag;
-extern unsigned char BIT_TMP;
+extern BIT BIT_TMP;
 
 extern unsigned char PID_highB,PID_lowB,DID_highB,DID_lowB,CONF0,CONF1,CONF2,CONF4;
 extern unsigned char recv_CONF0,recv_CONF1,recv_CONF2,recv_CONF4;

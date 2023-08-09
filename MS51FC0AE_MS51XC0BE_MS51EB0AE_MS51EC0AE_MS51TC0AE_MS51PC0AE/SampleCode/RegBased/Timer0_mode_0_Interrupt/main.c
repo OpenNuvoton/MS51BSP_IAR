@@ -11,7 +11,7 @@
 /************************************************************************************************************/
 /*  File Function: MS51 Timer 1 mode 0 with interrupt demo                                                  */
 /************************************************************************************************************/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /* if define TIMER0_FSYS_DIV12, timer = (0x1FFF-0x1000)*12/24MHz = 4.08ms */
 /* if define TIMER0_FSYS, timer = (0x1FFF-0x0010)/24MHz = 340us */
@@ -26,10 +26,11 @@ __interrupt void INT0_ISR(void){
   
     _push_(SFRS);
 
+    SFRS = 0;
     TH0 = TH0_INIT;
     TL0 = TL0_INIT;
     TF0 = 0 ;
-    P35 = ~P35;                              /* GPIO toggle when interrupt  */
+    GPIO_LED ^= 1;                              /* GPIO toggle when interrupt  */
   
     _pop_(SFRS);
 }
@@ -40,7 +41,9 @@ __interrupt void INT0_ISR(void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
-    P35_PUSHPULL_MODE;
+    GPIO_LED_QUASI_MODE;
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf ("\n\r Test start ...\n\r");
 
     ENABLE_TIMER1_MODE0;                           /* Timer 0 mode configuration */
     TIMER0_FSYS_DIV12;

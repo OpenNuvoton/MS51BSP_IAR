@@ -9,11 +9,14 @@
 //***********************************************************************************************************
 //  File Function: MS51 modify HIRC demo
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 void main(void)
 {
-  P35_PUSHPULL_MODE;
+    MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    Enable_UART0_VCOM_printf_24M_115200();
+	
   P11_PUSHPULL_MODE;
   P30_INPUT_MODE;
   set_CKCON_CLOEN;
@@ -26,9 +29,9 @@ void main(void)
       MODIFY_HIRC(HIRC_16);
       while(1)
       {
-        P35 = 1;
+        GPIO_LED = 1;
         Timer0_Delay(1600000,200,1000);
-        P35 = 0;
+        GPIO_LED = 0;
         Timer0_Delay(1600000,200,1000);
       }
     }
@@ -38,9 +41,9 @@ void main(void)
       MODIFY_HIRC(HIRC_24);
       while(1)
       {
-        P35 = 1;
+        GPIO_LED = 1;
         Timer0_Delay(2400000,200,1000);
-        P35 = 0;
+        GPIO_LED = 0;
         Timer0_Delay(2400000,200,1000);
       }
     }

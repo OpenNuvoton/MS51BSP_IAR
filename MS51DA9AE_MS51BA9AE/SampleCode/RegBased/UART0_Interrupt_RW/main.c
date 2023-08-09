@@ -4,11 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-/***********************************************************************************************************
-  File Function: MS51 UART0 receive and transmit loop test
-***********************************************************************************************************/
-#include "MS51_8K_IAR.h"
 
 /************************************************************************************************************/
 /*  Main function                                                                                           */
@@ -22,12 +19,19 @@
     ENABLE_GLOBAL_INTERRUPT;                                  /* Global interrupt enable */
   
 
-/* IMPORTANT : 
+/* IMPORTANT Notice: 
    1. MS51 8K tiny baord P2.0 connect reset pull high resister, must be removed  
    2. nRESET pin must setting as GPIO mode in CONFIG
    3. Remove ICE reset pin connect 
    then test UART0 input function .
 */
+   DISABLE_UART0_INTERRUPT;
+   printf ("\n\r UART RX pin also is RESET pin \n\r ");
+   printf ("\n\r Remove pull high resister to test UART0 Receive funciton! \n\r ");
+   DISABLE_UART0_PRINTF;
+   ENABLE_UART0_INTERRUPT; 
+   
+/* Main loop*/
   while(1)
   {
     if (uart0_receive_flag)

@@ -4,12 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-
-/***********************************************************************************************************/
-/*  File Function: MS51 IAP erase / program / read verify demo code                                        */
-/***********************************************************************************************************/
-#include "MS51_8K_IAR.h"
 
 /***********************************************************************************************************/
 /*  Step 1 Define APROM buffer data loop from 0 to 0x7F                                                    */
@@ -27,7 +23,7 @@ void main (void)
     }
 /*if P1.7 trig to low start Write APROM */ 
 /*Check with Nulink ICP please always keep P1.7 to high */
-    while(P17);
+    while(GPIO_LED);
     Erase_APROM(0x1000,128);
     Erase_Verify_APROM(0x1000,128);
     Program_APROM(0x1000,128);

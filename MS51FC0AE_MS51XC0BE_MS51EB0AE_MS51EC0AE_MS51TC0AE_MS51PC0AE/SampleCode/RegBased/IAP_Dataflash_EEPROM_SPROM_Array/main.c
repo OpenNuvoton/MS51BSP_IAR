@@ -5,7 +5,7 @@
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 struct
 {
@@ -35,10 +35,10 @@ void main(void)
 */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf("\n Toggle P02 to low to start test...");
+    printf(" \n\r  Toggle P35 to low to start test...");
 
-    P02_QUASI_MODE;
-    while (P02);
+    GPIO_LED_QUASI_MODE;
+    while (GPIO_LED);
 
     /** IAP program APROM as EEPROM way * include eeprom.c in Library       */
     for (i = 0; i < 50; i++)
@@ -52,15 +52,15 @@ void main(void)
 
     Write_SPROM_DATAFLASH_ARRAY(0, ArrayData, 50); //write 50 bytes
     system16highsite = Read_SPROM_BYTE((unsigned char __code *)0x05);
-//    printf("\n SPROM 0x05 = 0x%x", system16highsite);
+    printf(" \n\r  SPROM 0x05 = 0x%x", system16highsite);
     system16highsite = Read_SPROM_BYTE((unsigned char __code *)0x12) ;
-//    printf("\n SPROM 0x12 = 0x%x", system16highsite);
+    printf(" \n\r  SPROM 0x12 = 0x%x", system16highsite);
 
     Write_SPROM_DATAFLASH_ARRAY(0x11, (unsigned char *)&StructData, sizeof(StructData)); //write structure
     system16highsite = Read_SPROM_BYTE((unsigned char __code *)0x05);
-//    printf("\n SPROM 0x05 Value is updated = 0x%x", system16highsite);
+    printf(" \n\r  SPROM 0x05 Value is updated = 0x%x", system16highsite);
     system16highsite = Read_SPROM_BYTE((unsigned char __code *)0x12);
-    printf("\n SPROM 0x12 Value is updated = 0x%x", system16highsite);
+    printf(" \n\r  SPROM 0x12 Value is updated = 0x%x", system16highsite);
 
     DISABLE_UART0_PRINTF;
 

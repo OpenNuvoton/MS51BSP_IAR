@@ -34,7 +34,7 @@ void Package_checksum(void);
 void MODIFY_HIRC_24(void);
 void MODIFY_HIRC_16(void);
 
-extern unsigned char  BIT_TMP;
+extern BIT  BIT_TMP;
 extern __xdata volatile uint8_t uart_rcvbuf[64];
 extern __xdata volatile uint8_t uart_txbuf[64];
 extern __data volatile uint8_t bufhead;

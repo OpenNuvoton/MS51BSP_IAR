@@ -4,17 +4,20 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
+
 
 unsigned char uart2rvbuffer=0;
 unsigned char uart2rvflag;
 
+#if 0 
 #pragma vector=0xAB
 __interrupt void SC0_ISR(void){
 /* Since only enable receive interrupt, not add flag check */
         uart2rvflag = 1;
         uart2rvbuffer = SC0DR;
 }
+#endif
 /**
  * @brief       UART2 transfer data without interrupt 
  * @param       u32SysClock , define Fsys value(value)

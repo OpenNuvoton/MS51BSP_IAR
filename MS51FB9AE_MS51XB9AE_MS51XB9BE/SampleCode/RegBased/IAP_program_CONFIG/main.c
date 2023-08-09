@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 IAP program LDROM demo code
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 
 /*---------------------------------------------------------------
@@ -19,9 +14,12 @@
 
 void main (void) 
 {
-    P12_QUASI_MODE;
-    P12 = 1;
-    while(P12);
+    MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf ("\n\r Test start ...\n\r");
+    
+    while(GPIO_LED);
 
     if(PCON&SET_BIT4)        /* Check with power on flag. Only the first power on check with CONFIG */
     {

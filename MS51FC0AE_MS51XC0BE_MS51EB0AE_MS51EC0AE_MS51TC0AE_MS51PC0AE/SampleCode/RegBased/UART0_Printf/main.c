@@ -8,7 +8,7 @@
 /************************************************************************************************************/
 /*  File Function: MS51 use UART0 as printf function output demo                                            */
 /************************************************************************************************************/
-#include "MS51_32K_IAR.H"
+#include "ms51_32k_iar.h"
 
 
 void main (void) 
@@ -20,7 +20,7 @@ void main (void)
   
     while(1)
     {
-      printf_UART("\n Hello world!");
+      printf(" \n\r  Hello world! \n\r");
       Timer0_Delay(24000000,300,1000);
     }
 }

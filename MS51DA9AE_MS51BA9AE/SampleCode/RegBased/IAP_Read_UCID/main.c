@@ -4,11 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-//***********************************************************************************************************
-//  File Function: MS51 read UCID demo
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
 
 
 /***********************/
@@ -23,10 +20,10 @@ void main(void)
   
   Read_UCID();
   
-  printf_UART("\n UCID = ");
+  printf("\n\r UCID = ");
   for(u8Counter=0;u8Counter<12;u8Counter++)
   {
-    printf_UART(" 0x%x",UCIDBuffer[u8Counter]);
+    printf(" 0x%x",UCIDBuffer[u8Counter]);
     _delay_();_delay_();_delay_();_delay_();
   }
 

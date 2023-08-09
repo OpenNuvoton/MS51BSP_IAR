@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-/************************************************************************************************************/
-/*  File Function: MS51 Wakeup timer demo code with interrupt                                               */
-/************************************************************************************************************/
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 BIT  wktflag;
 #pragma vector=0x8B
@@ -19,7 +14,7 @@ __interrupt void WKT_ISR(void){
   
     clr_WKCON_WKTF;
     wktflag = 1;
-    P12 ^= 1;
+    GPIO_LED ^= 1;
     _pop_(SFRS);
 }
 
@@ -31,9 +26,9 @@ void main (void)
 {
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
-    P12_QUASI_MODE;
+    printf ("\n\r Test start ...\n\r");
     
     WKT_AutoReload_Interrupt_Initial_S(1);
     WKT_Interrupt(Enable);
@@ -44,7 +39,7 @@ void main (void)
       if(wktflag)
       {
         SFRS=0;
-        printf_UART ("\n WKT interrupt!");
+        printf (" \n\r  WKT interrupt!  \n\r ");
         wktflag = 0;
       }
     }

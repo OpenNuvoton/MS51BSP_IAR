@@ -4,9 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-
-#include "MS51_8K_IAR.h"
 
 unsigned char __xdata IAPSPDataBuf[127];
 

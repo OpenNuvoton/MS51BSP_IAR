@@ -4,13 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-//***********************************************************************************************************
-//  Website: http://www.nuvoton.com
-//  E-Mail : MicroC-8bit@nuvoton.com
-//  Date   : Jan/21/2020
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
 
 unsigned char __data  TA_REG_TMP,BYTE_TMP,SFRS_TMP;
 unsigned char __data hircmap0,hircmap1,offset,judge;

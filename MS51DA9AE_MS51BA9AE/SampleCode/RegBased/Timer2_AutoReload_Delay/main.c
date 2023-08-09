@@ -4,11 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-/************************************************************************************************************/
-/*  File Function: MS51 Timer 2 delay with interrupt demo                                                   */
-/************************************************************************************************************/
-#include "MS51_8K_IAR.h"
 
 /************************************************************************************************************
 *    Timer2 interrupt subroutine
@@ -18,7 +15,8 @@ __interrupt void Timer2_ISR(void){
   
     _push_(SFRS);
   
-    clr_T2CON_TF2;                                //Clear Timer2 Interrupt Flag
+    clr_T2CON_TF2;                 //Clear Timer2 Interrupt Flag
+    GPIO_LED ^= 1;                // LEDR1 toggle when interrupt 
 
     _pop_(SFRS);
 }
@@ -28,6 +26,7 @@ __interrupt void Timer2_ISR(void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
     
     TIMER2_DIV_128;
     TIMER2_Auto_Reload_Delay_Mode;
@@ -38,8 +37,8 @@ void main (void)
     TL2 = 0x60;
     TH2 = 0xFF;
 
-    set_EIE_ET2;                                    // Enable Timer2 interrupt
-    set_IE_EA;
+    ENABLE_TIMER2_INTERRUPT;                          // Enable Timer2 interrupt
+    ENABLE_GLOBAL_INTERRUPT;
     set_T2CON_TR2;                                    // Timer2 run
 
     while(1)

@@ -13,7 +13,7 @@
 //***********************************************************************************************************
 //  File Function: ML51 ADC / Bandgap input demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
 /*---------------------------------------------*/
@@ -21,7 +21,7 @@ void main(void)
 {
     MODIFY_HIRC(HIRC_24);
     
-    Set_Interrupt_Priority_Level(INT_WDT, 0);
+    SET_INT_WDT_LEVEL0;
     Set_Interrupt_Priority_Level(INT_ADC, 1);
     SET_INT_PWM_LEVEL3;
     while(1);

@@ -4,8 +4,9 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_32k_iar.h"
 
-#include "MS51_32K_IAR.H"
+
 
 /****************************************************************/
 void Spi_Write_Byte(unsigned char u8SpiWB)

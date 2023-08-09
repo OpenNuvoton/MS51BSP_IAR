@@ -9,9 +9,9 @@
 //***********************************************************************************************************
 //  File Function: ML51 UART0 ISP subroutine
 //***********************************************************************************************************
-#include "MS51_32K_IAR.H"
+#include "ms51_32k_iar.h"
 #include "ISP_I2C.h"
-unsigned char  BIT_TMP;
+BIT  BIT_TMP;
 
   __xdata volatile uint8_t rx_buf[64]; 
   __xdata volatile uint8_t tx_buf[64];
@@ -218,7 +218,7 @@ __interrupt void I2C_ISR(void){
       AA=1;
     } else {
         /* TO DO */
-        // printf_UART("Status 0x%x is NOT processed\n", u32Status);
+        // printf("Status 0x%x is NOT processed\n", u32Status);
     }
     SI = 0;
 

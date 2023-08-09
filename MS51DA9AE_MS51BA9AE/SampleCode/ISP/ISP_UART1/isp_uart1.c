@@ -4,13 +4,9 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: ML51 UART0 ISP subroutine
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
+#include "ms51_8k_iar.h"
 #include "isp_uart1.h"
+
 BIT BIT_TMP;
   __xdata volatile uint8_t uart_rcvbuf[64]; 
   __xdata volatile uint8_t uart_txbuf[64];

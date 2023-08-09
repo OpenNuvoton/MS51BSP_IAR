@@ -4,13 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 Access SPI Flash (W25Q16BV) demo code
-//***********************************************************************************************************
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 #define SPI_CMD_WRITE_ENABLE    0x06
 #define SPI_CMD_WRITE_DISABLE   0x04
@@ -22,7 +16,7 @@
 /****************************************************************/
 void SPI_Error(void)
 {
-    printf_UART ("\n SPI R/W error !");
+    printf (" \n\r  SPI R/W error !  \n\r ");
     while(1);
 }
 /****************************************************************/
@@ -184,7 +178,7 @@ void main(void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
     
     
     SPI_Initial();

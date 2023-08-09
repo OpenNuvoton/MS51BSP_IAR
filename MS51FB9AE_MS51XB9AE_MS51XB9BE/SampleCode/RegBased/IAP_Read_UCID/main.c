@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 read UCID demo
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 
 /***********************/
@@ -24,13 +19,10 @@ void main(void)
   Enable_UART0_VCOM_printf_24M_115200();
 
   Read_UCID();
-  printf_UART("\n UCID = ");
+  printf (" \n\r  UCID = ");
   for(READ1=0;READ1<12;READ1++)
   {
-    printf_UART(" 0x%x",UCIDBuffer[READ1]);
-    _delay_();
-    _delay_();
-    _delay_();
+    printf(" \r 0x%x",UCIDBuffer[READ1]);
   }
 
   while(1);

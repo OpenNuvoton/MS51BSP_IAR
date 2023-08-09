@@ -4,12 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-
-//***********************************************************************************************************
-//  File Function: MS51 BOD interrupt demo code
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
 
 BIT bodflag;
 
@@ -30,10 +26,9 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n Test start ...");
 
     BOD_Open(Enable, VBOD_2_7, BOD_Reset_Disable);
-    BOD_LowPower(LPBOD_Mode_3);
     BOD_Interrupt(Enable);
     ENABLE_GLOBAL_INTERRUPT;
     bodflag = 0;
@@ -42,7 +37,7 @@ void main (void)
      {
         if (bodflag)
         {
-         printf_UART ("\n BOD interrupt!");
+         printf ("\n BOD interrupt!");
          bodflag = 0;
         }
      }

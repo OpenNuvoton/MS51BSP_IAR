@@ -9,7 +9,7 @@
 /***********************************************************************************************************/
 /*  File Function: MS51 IAP erase / program / read verify demo code                                        */
 /***********************************************************************************************************/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /***********************************************************************************************************/
 /*  Step 1 Enable CONFIG to boot from LDROM , LDROM siez 2K                                                */
@@ -27,9 +27,10 @@ void main (void)
       IAPDataBuf[i]=i;
     }
 /*if P3.5 trig to low start Write APROM */ 
-/*Check with Nulink ICP please always keep P1.7 to high */
-
-    while(P35);
+    
+    GPIO_LED_QUASI_MODE;
+    while (GPIO_LED);
+    
     Erase_APROM(0x80,128);
     Erase_Verify_APROM(0x80,128);
     Program_APROM(0x80,128);

@@ -7,7 +7,7 @@
 /******************************************************************************/
 /*                         Peripheral header files                            */
 /******************************************************************************/
-#include "Function_define_MS51_32K_IAR.h"
+#include "function_define_ms51_32k_iar.h"
 #include "adc.h"
 #include "bod.h"
 #include "common.h"
@@ -15,9 +15,9 @@
 #include "eeprom_sprom.h"
 #include "eeprom.h"
 #include "eeprom_sprom.h"
-#include "I2C.h" 
-#include "IAP.h"
-#include "IAP_SPROM.h"
+#include "i2c.h" 
+#include "iap.h"
+#include "iap_sprom.h"
 #include "isr.h" 
 #include "pwm0.h"
 #include "pwm123.h"
@@ -28,7 +28,7 @@
 #include "uart2.h"
 #include "uart3.h"
 #include "uart4.h"
-#include "watchdog.h"
+#include "wdt.h"
 #include "wkt.h"
 
 #define BIT __no_init bool __bit  

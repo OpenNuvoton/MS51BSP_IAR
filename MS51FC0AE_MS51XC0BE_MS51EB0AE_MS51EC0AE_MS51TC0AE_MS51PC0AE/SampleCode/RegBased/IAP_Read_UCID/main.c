@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 read UCID demo
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /***********************/
 /* main loop           */
@@ -28,11 +28,10 @@ void main(void)
   
   
   Read_UCID();
-  printf_UART("\n UCID = ");
+  printf(" \n\r  UCID = ");
   for(u8Counter=0;u8Counter<12;u8Counter++)
   {
-    printf_UART(" 0x%x",UCIDBuffer[u8Counter]);
-    _delay_();_delay_();_delay_();_delay_();
+    printf(" 0x%x",UCIDBuffer[u8Counter]);
   }
   while(1);
 

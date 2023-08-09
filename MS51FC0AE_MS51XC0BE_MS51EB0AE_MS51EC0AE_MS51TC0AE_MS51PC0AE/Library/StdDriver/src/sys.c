@@ -4,7 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 unsigned char __data hircmap0,hircmap1;
 

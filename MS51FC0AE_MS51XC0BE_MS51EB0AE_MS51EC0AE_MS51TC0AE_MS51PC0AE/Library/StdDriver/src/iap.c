@@ -4,8 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_32k_iar.h"
 
-#include "MS51_32K_IAR.h"
 unsigned char __xdata DIDBuffer[4];
 unsigned char __xdata UIDBuffer[12];
 unsigned char __xdata UCIDBuffer[12];

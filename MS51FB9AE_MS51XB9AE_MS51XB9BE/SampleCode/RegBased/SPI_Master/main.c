@@ -4,18 +4,13 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 SPI in Master mode demo code
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 #define  slave_interrupt
 //-----------------------------------------------------------------------------------------------------------
 void SPI_Error(void)
 {
-    printf_UART ("\n SPI error!");
+    printf (" \n\r  SPI error!  \n\r ");
     while(1);                                       // SPI error 
 }
 
@@ -99,7 +94,7 @@ void main(void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
     
     
     SPI_Initial();

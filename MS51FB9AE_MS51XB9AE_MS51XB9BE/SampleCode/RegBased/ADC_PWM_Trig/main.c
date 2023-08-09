@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 ADC PWM trig convert demo code
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 BIT adcintflag;
 /******************************************************************************
@@ -42,7 +37,7 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
     
 #if 0
 // By PWM falling edge
@@ -88,7 +83,7 @@ void main (void)
     {
       if (adcintflag)
       {
-        printf_UART( "\n ADCRH = 0x%x", ADCRH);
+        printf( "\n ADCRH = 0x%x", ADCRH);
         adcintflag = 0;
       }
     }

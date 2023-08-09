@@ -4,9 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 struct
 {
@@ -31,12 +29,12 @@ void main (void)
     unsigned char temp;
       
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART("\n Flash as EEPROM demo...Toggle P14 to Low" );  
-  /*loop here while P46 = 1; */  
-    P14_QUASI_MODE;
-    while(P14);
-
+    printf(" \n\r Flash as EEPROM demo...Toggle P12 to Low  \n\r " ); 
+    
+  /*loop here while P12 = 1; */  
+    while(GPIO_LED);
 
 /** IAP program APROM as EEPROM way
    * include eeprom.c in Library       */ 
@@ -56,7 +54,7 @@ void main (void)
     Write_DATAFLASH_ARRAY(0x18FE,(unsigned char *)&StructData,sizeof(StructData));//write structure
 
     temp = Read_APROM_BYTE((unsigned int __code *)0x18FD);
-    printf_UART("\n 0x18FD Value is 0x%x", temp );
+    printf(" \n\r  0x18FD Value is 0x%x", temp );
     
     while(1);
 }

@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 Timer1 demo
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
 /* if define TIMER1_FSYS_DIV12, timer = (0xFFFF-0x1000)*12/24MHz = 30.58ms */
@@ -25,11 +25,12 @@
 __interrupt void INT0_ISR(void){
   
     _push_(SFRS);
- 
+
+    SFRS = 0;
     TH1 = TH1_INIT;
     TL1 = TL1_INIT;    
     TF0 = 0;
-    P35 = ~P35;                     // GPIO1 toggle when interrupt
+    GPIO_LED ^= 1;                /* LEDR1 toggle when interrupt */
   
     _pop_(SFRS);
 }
@@ -40,11 +41,12 @@ __interrupt void INT0_ISR(void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
-    P35_PUSHPULL_MODE;
+    GPIO_LED_QUASI_MODE;
   
     ENABLE_TIMER1_MODE1;
     TIMER1_FSYS_DIV12;
 
+    SFRS = 0;
     TH1 = TH1_INIT;
     TL1 = TL1_INIT;
     

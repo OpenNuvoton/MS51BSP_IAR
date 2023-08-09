@@ -4,21 +4,17 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 modify HIRC demo
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 void main(void)
 {
+  GPIO_LED_QUASI_MODE;
   P11_PUSHPULL_MODE;
   P12_PUSHPULL_MODE;
   set_CKCON_CLOEN;
 /* clock out div 100 */
   CKDIV = 50;
-  while (P20)
+  while (GPIO_LED)
   {
     MODIFY_HIRC(HIRC_16);
     P12 = 1;

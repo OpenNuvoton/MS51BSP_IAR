@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 IAP program LDROM demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
 /*---------------------------------------------------------------
@@ -21,9 +21,8 @@ void main (void)
 {
     MODIFY_HIRC(HIRC_24);
     
-    P12_QUASI_MODE;
-    P12 = 1;
-    while(P12);
+    GPIO_LED_QUASI_MODE;
+    while (GPIO_LED);
 
     if(PCON&SET_BIT4)        /* Check with power on flag. Only the first power on check with CONFIG */
     {

@@ -4,8 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 BIT BIT_TMP;
 unsigned char __data TA_REG_TMP,BYTE_TMP,SFRS_TMP;

@@ -4,13 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: ML51 UART0 ISP subroutine
-//***********************************************************************************************************
-#include "MS51_16K_IAR.H"
-#include "ISP_I2C.h"
+#include "ms51_16k_iar.h"
+#include "isp_i2c.h"
 BIT BIT_TMP;
 
   __xdata volatile uint8_t rx_buf[64]; 
@@ -218,7 +213,7 @@ __interrupt void I2C_ISR(void){
       AA=1;
     } else {
         /* TO DO */
-        // printf_UART("Status 0x%x is NOT processed\n", u32Status);
+        // printf("Status 0x%x is NOT processed\n", u32Status);
     }
     SI = 0;
 

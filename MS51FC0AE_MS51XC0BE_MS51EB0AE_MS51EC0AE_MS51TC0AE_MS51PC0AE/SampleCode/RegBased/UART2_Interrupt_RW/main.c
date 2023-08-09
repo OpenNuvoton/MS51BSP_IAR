@@ -10,16 +10,24 @@
 //  File Function: ML51 simple GPIO toggle out demo code
 //***********************************************************************************************************
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
+
+#define  UART2_P30_P17
 
 
+#pragma vector=0xAB
+__interrupt void SC0_ISR(void){
+/* Since only enable receive interrupt, not add flag check */
+        uart2rvflag = 1;
+        uart2rvbuffer = SC0DR;
+}
 /**
  * @brief       UART2 TXD output demo
  * @param       None
  * @return      None
  * @details     conned UART2 and UART0 to loop check.
  */
-#define  UART2_P30_P17;
+
 
 void main (void) 
 {
@@ -40,9 +48,8 @@ void main (void)
     ENABLE_SC0_RECEIVE_DATA_REACH_INTERRUPT;
     ENABLE_GLOBAL_INTERRUPT;
 
-   
 /* while receive data from RXD, send this data to TXD */
-  while(1)
+  while(1) 
   {
     if (uart2rvflag)
     {
@@ -51,4 +58,4 @@ void main (void)
     }
   }
 
-  }
+}

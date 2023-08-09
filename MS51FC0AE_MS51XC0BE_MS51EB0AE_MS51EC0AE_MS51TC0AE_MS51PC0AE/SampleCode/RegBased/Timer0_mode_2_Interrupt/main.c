@@ -9,7 +9,7 @@
 /************************************************************************************************************/
 //  File Function: MS51 Timer0 mode 2 demo
 /************************************************************************************************************/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
 /* if define TIMER0_FSYS_DIV12, timer = (256-56)*12/246MHz = 100us */
@@ -25,7 +25,7 @@ __interrupt void INT0_ISR(void){
   
     _push_(SFRS);
    
-    P35 = ~P35;                                 // GPIO1 toggle when interrup
+    GPIO_LED ^= 1;                                 // GPIO1 toggle when interrup
   
     _pop_(SFRS);
 }
@@ -36,7 +36,8 @@ __interrupt void INT0_ISR(void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
-    P35_PUSHPULL_MODE;
+    GPIO_LED_QUASI_MODE;
+    
     P05_PUSHPULL_MODE;
     set_P0S_5;
     ENABLE_TIMER0_MODE2;

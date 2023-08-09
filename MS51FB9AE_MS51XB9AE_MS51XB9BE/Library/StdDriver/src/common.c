@@ -4,8 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_16k_iar.h"
 
-#include "MS51_16K_IAR.H"
 
 BIT BIT_TMP;
 /**

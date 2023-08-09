@@ -1,15 +1,11 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /*                                                                                                         */
+/* SPDX-License-Identifier: Apache-2.0                                                                     */
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_32k_iar.h"
 
-//***********************************************************************************************************
-//  Website: http://www.nuvoton.com
-//  E-Mail : MicroC-8bit@nuvoton.com
-//***********************************************************************************************************
-
-#include "MS51_32K_IAR.h"
 
 /****** PWM123 SETTING ********/
  /**
@@ -182,4 +178,19 @@ void PWM2_RUN()
 void PWM3_RUN()
 {
 	set_PWM3CON0_PWMRUN;
+}
+
+void PWM1_Reload(void)
+{
+    set_PWM1CON0_LOAD;
+}
+
+void PWM2_Reload(void)
+{
+    set_PWM2CON0_LOAD;
+}
+
+void PWM3_Reload(void)
+{
+    set_PWM3CON0_LOAD;
 }

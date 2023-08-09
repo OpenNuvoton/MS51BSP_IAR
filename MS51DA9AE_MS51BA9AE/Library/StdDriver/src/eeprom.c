@@ -4,13 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-//***********************************************************************************************************
-//  Website: http://www.nuvoton.com
-//  E-Mail : MicroC-8bit@nuvoton.com
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
-
+#include "ms51_8k_iar.h"
 
 
 volatile unsigned char __xdata page_buffer[128];
@@ -48,7 +42,7 @@ void Write_DATAFLASH_BYTE(unsigned int u16EPAddr,unsigned char u8EPData)
     set_CHPCON_IAPEN; 
     set_IAPUEN_APUEN;
     IAPCN = 0x22;     
-     set_IAPTRG_IAPGO; 
+     set_IAPTRG_IAPGO_WDCLR; 
     
 //Save changed RAM data to APROM DATAFLASH
     set_CHPCON_IAPEN; 
@@ -59,7 +53,7 @@ void Write_DATAFLASH_BYTE(unsigned int u16EPAddr,unsigned char u8EPData)
       IAPAL = (u16_addrl_r&0xff)+looptmp;
       IAPAH = (u16_addrl_r>>8)&0xff;
       IAPFD = page_buffer[looptmp];
-      set_IAPTRG_IAPGO;      
+      set_IAPTRG_IAPGO_WDCLR;      
     }
     clr_IAPUEN_APUEN;
     clr_CHPCON_IAPEN;
@@ -118,7 +112,7 @@ unsigned char WriteDataToOnePage(unsigned int u16_addr,const unsigned char *pDat
     for(i=0;i<num;i++)
     {
       IAPFD = pDat[i];
-      set_IAPTRG_IAPGO;
+      set_IAPTRG_IAPGO_WDCLR;
       IAPAL++;
     }
     for(i=0;i<num;i++)
@@ -145,12 +139,12 @@ unsigned char WriteDataToOnePage(unsigned int u16_addr,const unsigned char *pDat
       IAPAH = u16_addr>>8;
       IAPCN = PAGE_ERASE_APROM;
       IAPFD = 0xFF;  
-      set_IAPTRG_IAPGO; 
+      set_IAPTRG_IAPGO_WDCLR; 
       IAPCN =BYTE_PROGRAM_APROM;
       for(i=0;i<128;i++)
       {
         IAPFD = xd_tmp[i];
-        set_IAPTRG_IAPGO;
+        set_IAPTRG_IAPGO_WDCLR;
         IAPAL++;
       }
       for(i=0;i<128;i++)

@@ -1,5 +1,12 @@
+/*---------------------------------------------------------------------------------------------------------*/
+/*                                                                                                         */
+/* SPDX-License-Identifier: Apache-2.0                                                                     */
+/* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
+/*                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------*/
+
 /*--------------------------------------------------------------------------------------*/
-/*  SFR_Macro_MS51_8K.H                                                                 */
+/*  sfr_macro_ms51_8k_iar.h                                                             */
 /*  SFR Macro define for Nuvoton MS51DA9AE / MS51BA9AE                                  */
 /*  <Define rule I> set or clr _ regsiter name _ register bit name                      */
 /*--------------------------------------------------------------------------------------*/
@@ -8,27 +15,29 @@
 /******************************************************************************/
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdbool.h>
-
+#include <math.h>
 /******************************************************************************/
 /*                         Peripheral header files                            */
 /******************************************************************************/
-#include "Function_define_MS51_8K_IAR.h"
+#include "function_define_ms51_8k_iar.h"
+#include "adc.h"
 #include "bod.h"
-#include "Common.h"
-#include "Delay.h"
+#include "common.h"
+#include "delay.h"
 #include "eeprom.h"
 #include "eeprom_sprom.h"
 #include "i2c.h"
-#include "IAP.h"
-#include "IAP_SPROM.h"
+#include "iap.h"
+#include "iap_sprom.h"
 #include "isr.h"
 #include "pwm.h"
 #include "sys.h"
 #include "spi.h"
 #include "timer.h"
 #include "uart.h"
-#include "watchdog.h"
+#include "wdt.h"
 #include "wkt.h"
 /********************************************************************/
 /*  <Macro define                                                   */

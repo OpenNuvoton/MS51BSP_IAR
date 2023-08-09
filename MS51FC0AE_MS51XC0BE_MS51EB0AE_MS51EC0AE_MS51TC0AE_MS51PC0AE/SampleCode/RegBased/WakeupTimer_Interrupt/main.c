@@ -10,7 +10,7 @@
 /*  File Function: MS51 Wakeup timer demo code with interrupt                                               */
 /************************************************************************************************************/
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
 BIT  wktflag;
@@ -33,9 +33,9 @@ void main (void)
 {
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
-    P35_QUASI_MODE;
+    printf ("\n\r Test start ...\n\r");
     
     WKT_AutoReload_Interrupt_Initial_S(1);
     WKT_Interrupt(Enable);
@@ -46,7 +46,7 @@ void main (void)
       if(wktflag)
       {
         SFRS=0;
-        printf_UART ("\n WKT interrupt!");
+        printf ("\n WKT interrupt!");
         wktflag = 0;
       }
     }

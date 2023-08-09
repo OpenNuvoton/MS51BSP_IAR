@@ -6,7 +6,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /**
  * @brief       PWM Synchronous mode PWM0 channel 0/2/4 setting and channel 1/3/4 follow output demo

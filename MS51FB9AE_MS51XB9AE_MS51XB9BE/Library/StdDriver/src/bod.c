@@ -4,13 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_16k_iar.h"
 
-//***********************************************************************************************************
-//  Website: http://www.nuvoton.com
-//  E-Mail : MicroC-8bit@nuvoton.com
-//***********************************************************************************************************
-
-#include "MS51_16K_IAR.H"
 
 unsigned char sfrtemp;
 /**
@@ -19,11 +14,8 @@ unsigned char sfrtemp;
   *                       - \ref Enable 
   *                       - \ref Disable
   * @param[in] u8bodlevel define BOD level.
-  *                       - \ref VBOD_1_8 (1.8V)
-  *                       - \ref VBOD_2_0 (2.0V)
-  *                       - \ref VBOD_2_4 (2.4V)
+  *                       - \ref VBOD_2_2 (2.42V)
   *                       - \ref VBOD_2_7 (2.7V)
-  *                       - \ref VBOD_3_0 (3.0V)
   *                       - \ref VBOD_3_7 (3.7V)
   *                       - \ref VBOD_4_4 (4.4V)
   * @param[in] u8bodresetstatus define reset or not when BOD event trig.
@@ -44,23 +36,6 @@ void BOD_Open(unsigned char u8bodstatus, unsigned char u8bodlevel, unsigned char
      TA=0xAA; TA=0x55; BODCON0=sfrtemp; 
 }
 
-
-/**
-  * @brief Low power BOD initial setting 
-  * @param[in] u8bodlevel define BOD level.
-  *                       - \ref LPBOD_MODE_NORMAL (Turn on BOD always)
-  *                       - \ref LPBOD_MODE_1 (Turn on BOD every 1.6ms)
-  *                       - \ref LPBOD_MODE_2 (Turn on BOD every 6.4ms)
-  *                       - \ref LPBOD_MODE_3 (Turn on BOD every 25.6ms)
-  * @return  None
-  * @note    None
-  * @exmaple :  BOD_LowPower(LPBOD_MODE3);
-*/
-void BOD_LowPower(unsigned char u8LPBDD)
-{
-     SFRS=0; BODCON1=0;
-     TA=0xAA;TA=0x55;BODCON1 |= u8LPBDD;
-}
 
 /**
   * @brief Low power BOD initial setting 

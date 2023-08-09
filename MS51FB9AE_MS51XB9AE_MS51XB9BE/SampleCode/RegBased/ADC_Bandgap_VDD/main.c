@@ -4,39 +4,12 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-//**********************************************************************************************************/
-//  File Function: MS51 ADC read bandgap to VDD demo code                                                  */
-//**********************************************************************************************************/
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 //*****************  The Following is in define in Fucntion_define.h  ***************************
 //****** Always include Function_define.h call the define you want, detail see main(void) *******
 //***********************************************************************************************
 double  Bandgap_Voltage,VDD_Voltage;      //please always use "double" mode for this
-
-void READ_BANDGAP()
-{
-    unsigned int Bandgap_Value;
-    unsigned char BandgapHigh,BandgapLow;
-
-    set_CHPCON_IAPEN;
-    IAPCN = READ_UID;
-    IAPAL = 0x0d;
-    IAPAH = 0x00;
-    set_IAPTRG_IAPGO;
-    BandgapLow = IAPFD;
-//    BandgapMark = BandgapLow&0xF0;
-    BandgapLow = BandgapLow&0x0F;
-    IAPAL = 0x0C;
-    IAPAH = 0x00;
-    set_IAPTRG_IAPGO;
-    BandgapHigh = IAPFD;
-    Bandgap_Value = (BandgapHigh<<4)+BandgapLow;
-    Bandgap_Voltage= Bandgap_Value*3/4;
-    clr_CHPCON_IAPEN;
-}
 
 /******************************************************************************
 The main C function.  Program execution starts
@@ -44,29 +17,36 @@ here after stack initialization.
 ******************************************************************************/
 void main (void) 
 {
-   unsigned int bgvalue;
-   unsigned  char  ADCdataH, ADCdataL;
-   
-   MODIFY_HIRC(HIRC_24);
+    UINT16 ADC_BG_Result;
 
-/*Read bandgap value */
-    READ_BANDGAP();
-/* ADC Low speed initial*/  
+    MODIFY_HIRC(HIRC_24);
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf ("\n\r Test start ...");
+
+/* ADC sampling timing setting for Bandgap*/  
     ENABLE_ADC_BANDGAP;
     ADCCON1|=0x30;            /* clock divider */
     ADCCON2|=0x0E;            /* AQT time */
 /*start bandgap ADC */
     clr_ADCCON0_ADCF;
-    set_ADCCON0_ADCS;                                
+    set_ADCCON0_ADCS;
     while(ADCF == 0);
-    ADCdataH = ADCRH;
-    ADCdataL = ADCRL;
-/* to convert VDD value */
-    bgvalue = (ADCdataH<<4) + ADCdataL;
-
-    VDD_Voltage = (double)0x1000/bgvalue*Bandgap_Voltage;
+/* ADC convert current Bandgap value */
+    ADC_BG_Result = ADCRH<<4 ;
+    ADC_BG_Result = ADC_BG_Result|(ADCRL&0x0F);
+    DISABLE_ADC;              /*Disable ADCEN each time after ADC trig */
+    
+ /*                  VDD  Now                         READ_BANDGAP() VALUE              */
+ /*    ------------------------------------- = ----------------------------------       */
+ /*    3072mV(Storage value test condition)      NOW ADC Bandgap convert reuslt         */
+      VDD_Voltage = ((float)READ_BANDGAP()/(float)ADC_BG_Result)*3.072;
+      printf ("\n\r VDD_Voltage =  %f ", VDD_Voltage);
+      
+ /*            Bandgap real voltage                    READ_BANDGAP() VALUE             */
+ /*    ------------------------------------- = ----------------------------------       */
+ /*    3072mV(Storage value test condition)              4096(12bit ADC)                */
+     Bandgap_Voltage = ((float)READ_BANDGAP()*3/4/1000);
+     printf ("\n\r Bandgap_Voltage = %f ", Bandgap_Voltage);
+     
     while(1);
-
 }
-
-

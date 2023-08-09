@@ -4,11 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-//***********************************************************************************************************
-//  File Function: MS51 Access SPI Flash (W25Q16BV) demo code
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
 
 #define SPI_CMD_WRITE_ENABLE    0x06
 #define SPI_CMD_WRITE_DISABLE   0x04
@@ -78,7 +75,7 @@ void SpiFlash_Write_Disable(void)
 }
 
 /****************************************************************/
-void SpiFlash_Read_MID_DID(UINT8 *pu8A,UINT8 *pu8B)
+void SpiFlash_Read_MID_DID(uint8_t *pu8A,uint8_t *pu8B)
 {
     SS_PIN = 0;
     Spi_Write_Byte(0x90);

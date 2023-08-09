@@ -4,18 +4,13 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 
-unsigned char PRINTFG,uart0_receive_flag,uart1_receive_flag;
+BIT PRINTFG,uart0_receive_flag,uart1_receive_flag;
 unsigned char uart0_receive_data,uart1_receive_data;
 
-struct BitFlag
-{   unsigned char uart0_receive_flag: 1;
-    unsigned char uart1_receive_flag: 1;
-    unsigned char PRINTFG: 1;
-}Flag;
-
+#if 0
 #pragma vector=0x23
 __interrupt void UART0_ISR(void){
   
@@ -58,7 +53,7 @@ __interrupt void SerialPort1_ISR(void){
 
     _pop_(SFRS);
 }
-
+#endif 
 /*MS51 new version buadrate */
 void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long u32Baudrate)
 {

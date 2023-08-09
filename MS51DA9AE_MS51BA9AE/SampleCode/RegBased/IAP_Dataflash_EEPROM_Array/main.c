@@ -4,11 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-#include "MS51_8K_IAR.h"
-
-/* For printf code only. Disable this define to reduce code size. */
-//#define print_function 
+#include "ms51_8k_iar.h"
 
 struct
 {
@@ -33,31 +29,27 @@ void main (void)
     unsigned char temp;
     
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART("\n Flash as EEPROM demo...Toggle P17 to Low" );
-    
-    P17_QUASI_MODE;
-    while(P17);
+    printf("\n\r Flash as EEPROM demo...Toggle P17 to Low" );
 
-/** IAP program APROM as EEPROM way
-   * include eeprom.c in Library       */ 
- 
+    while(GPIO_LED);
+
     Write_DATAFLASH_BYTE (0x1882,0x34);
 
     for(i=0;i<50;i++)
     {
       ArrayData[i]=i;
     }
-
     StructData.a=0xA1A2;
     StructData.b=0xA3A4A5A6;
     StructData.c=0xA7;
-  
-    Write_DATAFLASH_ARRAY(0x18E0,ArrayData,50);//write 50 bytes
-    Write_DATAFLASH_ARRAY(0x18FE,(unsigned char *)&StructData,sizeof(StructData));//write structure
-  
+
+    Write_DATAFLASH_ARRAY(0x18E0,ArrayData,50);                                   //write 50 bytes need 2ms
+    Write_DATAFLASH_ARRAY(0x18FE,(unsigned char *)&StructData,sizeof(StructData));//write structure 20ms
+
     temp = Read_APROM_BYTE((unsigned int __code *)0x18FD);
-    printf_UART("\n 0x18FD Value is 0x%x", temp );
+    printf("\n\r 0x18FD Value is 0x%x", temp );
 
     while(1);
 }

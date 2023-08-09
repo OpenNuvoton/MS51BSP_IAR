@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 Clock out from CLKO pin P1.1 demo.
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 void main(void)
 {
@@ -19,7 +19,7 @@ void main(void)
 */
 
     P11_PUSHPULL_MODE;                    /* P01 CLKO pin setting push pull mode to check output. */
-    set_CKCON_CLOEN;                                  //System Clock Output Enable
+    set_CKCON_CLOEN;                      //System Clock Output Enable
 /* Note */ 
 /* Each time modify the HIRC must do re-power on process to confirm HIRC modified. */
 

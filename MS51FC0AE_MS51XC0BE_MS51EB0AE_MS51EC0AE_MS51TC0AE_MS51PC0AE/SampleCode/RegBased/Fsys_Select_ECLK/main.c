@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 system clock enable ECLK demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /*=============================================================================================*/
 /*  The test process:                                                                          */
@@ -22,20 +22,20 @@
 
 void main(void)
 {
-
+    MODIFY_HIRC(HIRC_24);
 /* Note
   MCU power on system clock is HIRC (16 MHz)
   Please keep P3.0 HIGH before you want to modify Fsys to LIRC
 */
-    P35_INPUT_MODE;
+    GPIO_LED_QUASI_MODE;;
     P11_PUSHPULL_MODE;
     set_CKCON_CLOEN;                                  // Also can check P1.1 CLO pin for clock to find the Fsys change.
-    while(P35);
+    while(GPIO_LED);
     FsysSelect(FSYS_ECLK_P30);
-    Timer0_Delay(16000000,200,1000);
-    while (!P35);
+    Timer0_Delay(24000000,200,1000);
+    while (!GPIO_LED);
     FsysSelect(FSYS_HIRC);
-    Timer0_Delay(16000000,2000,1000);
+    Timer0_Delay(24000000,2000,1000);
     set_PCON_PD;
     while(1);
 

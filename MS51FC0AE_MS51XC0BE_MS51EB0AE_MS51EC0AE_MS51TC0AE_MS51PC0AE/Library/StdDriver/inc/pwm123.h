@@ -35,3 +35,6 @@ void PWM_ALL_RUN();
 void PWM1_RUN();
 void PWM2_RUN();
 void PWM3_RUN();
+void PWM1_Reload(void);
+void PWM2_Reload(void);
+void PWM3_Reload(void);

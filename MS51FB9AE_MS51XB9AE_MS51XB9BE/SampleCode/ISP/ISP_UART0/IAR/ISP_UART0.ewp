@@ -37,12 +37,12 @@
                 <option>
                     <name>Data Memory Model</name>
                     <version>0</version>
-                    <state>1</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>Data Memory Model slave</name>
                     <version>0</version>
-                    <state>1</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>Use extended stack</name>
@@ -59,7 +59,7 @@
                 <option>
                     <name>Calling convention</name>
                     <version>0</version>
-                    <state>2</state>
+                    <state>4</state>
                 </option>
                 <option>
                     <name>Workseg Size</name>
@@ -137,7 +137,7 @@
                 </option>
                 <option>
                     <name>RTLibraryPath</name>
-                    <state>$TOOLKIT_DIR$\LIB\CLIB\cl-pli-nsid-2h16inc.r51</state>
+                    <state>$TOOLKIT_DIR$\LIB\CLIB\cl-pli-nsid-1e16x01.r51</state>
                 </option>
                 <option>
                     <name>Input variant</name>
@@ -728,7 +728,7 @@
             <archiveVersion>1</archiveVersion>
             <data>
                 <prebuild></prebuild>
-                <postbuild></postbuild>
+                <postbuild>cmd /C ""$TOOLKIT_DIR$\..\..\..\Nuvoton Tools\Nu-Link_IAR\Hex2Bin.exe" "$PROJ_DIR$\Debug\Exe\$TARGET_BNAME$.a51""</postbuild>
             </data>
         </settings>
         <settings>
@@ -748,7 +748,7 @@
                 </option>
                 <option>
                     <name>XOutOverride</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OutputFile</name>
@@ -938,20 +938,20 @@
                 </option>
                 <option>
                     <name>GenerateExtraOutput</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>XExtraOutOverride</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>ExtraOutputFile</name>
-                    <state>ISP_UART0.sim</state>
+                    <state>ISP_UART0.hex</state>
                 </option>
                 <option>
                     <name>ExtraOutputFormat</name>
                     <version>11</version>
-                    <state>60</state>
+                    <state>22</state>
                 </option>
                 <option>
                     <name>ExtraFormatVariant</name>
@@ -960,11 +960,11 @@
                 </option>
                 <option>
                     <name>xcOverrideProgramEntryLabel</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>xcProgramEntryLabelSelect</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>ListOutputFormat</name>
@@ -2224,6 +2224,9 @@
             <data />
         </settings>
     </configuration>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\..\Library\Startup\IAR\cstartup.s51</name>
+    </file>
     <file>
         <name>$PROJ_DIR$\..\isp_uart0.c</name>
     </file>

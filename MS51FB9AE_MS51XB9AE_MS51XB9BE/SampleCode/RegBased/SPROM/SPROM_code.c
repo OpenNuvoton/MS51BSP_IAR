@@ -4,19 +4,13 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 locate data in APROM simple demo 
-//***********************************************************************************************************
-#include "MS51_16K_IAR.h"
-#include "SPROM.h"
+#include "ms51_16k_iar.h"
+#include "sprom.h"
 
 /* SPROM area address define in .xcl file */
 unsigned char SPROM_FUNC(unsigned char unused)  @ "SPROM_C"
 {
-  P12_PUSHPULL_MODE;
-  P12 ^= 1;
+  GPIO_LED ^= 1;
   SPTEMP++;
   return SPTEMP;
 }

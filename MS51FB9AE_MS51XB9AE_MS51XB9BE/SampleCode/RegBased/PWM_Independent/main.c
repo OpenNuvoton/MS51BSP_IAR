@@ -4,8 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 /**
  * @brief       PWM indepedent mode PWM0 channel 0~5 output demo
@@ -19,7 +18,7 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
     
 /* PWM0 initial setting  
    * include pwm.c in Library for PWM mode setting

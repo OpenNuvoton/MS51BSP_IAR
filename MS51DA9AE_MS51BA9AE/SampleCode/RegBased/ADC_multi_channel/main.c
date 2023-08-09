@@ -4,12 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-
-/**********************************************************************************************************/
-/*  File Function: MS51 ADC multi channel input demo code                                                 */
-/**********************************************************************************************************/
-#include "MS51_8K_IAR.h"
 
 unsigned char __xdata ADCdataAIN5H, ADCdataAIN5L;
 unsigned char __xdata ADCdataVBGH, ADCdataVBGL;
@@ -23,7 +19,7 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n Test start ...");
     
 /*Enable channel 5 */ 
       ENABLE_ADC_CH5;
@@ -35,7 +31,7 @@ void main (void)
       ADCdataAIN5H = ADCRH;
       ADCdataAIN5L = ADCRL;
       DISABLE_ADC;
-      printf_UART("\n ADC channel 5 =0x%x", ADCdataAIN5H);
+      printf("\n\r\r ADC channel 5 =0x%x", ADCdataAIN5H);
 
 
 /*Enable Bandgap */     
@@ -48,7 +44,7 @@ void main (void)
       ADCdataVBGH = ADCRH;
       ADCdataVBGL = ADCRL;
       DISABLE_ADC;
-      printf_UART("\n ADC channel bandgap =0x%x", ADCdataVBGH);
+      printf("\n\r\r ADC channel bandgap =0x%x", ADCdataVBGH);
       
     while(1);  
 }

@@ -8,7 +8,7 @@
 //***********************************************************************************************************
 //  File Function: ML51 UART0 ISP subroutine
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 #include "isp_uart0.h"
 
 __xdata volatile uint8_t uart_rcvbuf[64];
@@ -25,7 +25,7 @@ __data volatile uint8_t bUartDataReady;
 __data volatile uint8_t g_timer0Over;
 __data volatile uint8_t g_timer1Over;
 __data volatile uint8_t g_programflag;
-unsigned char BIT_TMP;
+BIT BIT_TMP;
 
 unsigned char PID_highB, PID_lowB, DID_highB, DID_lowB, CONF0, CONF1, CONF2, CONF4;
 unsigned char recv_CONF0, recv_CONF1, recv_CONF2, recv_CONF4;

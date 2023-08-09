@@ -4,13 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-/************************************************************************************************************/
-/*  File Function: MS51 INT1 extneranl interrupt demo                                                       */
-/************************************************************************************************************/
-#include "MS51_16K_IAR.H"
-
+#include "ms51_16k_iar.h"
 BIT int1flag;
 /* External pin interrupt INT0 subroutine */
 #pragma vector=0x13
@@ -28,7 +22,7 @@ void main (void)
     /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
   
     P17_QUASI_MODE;                      //setting INT0 pin P1.7 as Quasi mode with internal pull high  
     P17 = 1;
@@ -39,7 +33,7 @@ void main (void)
     {
        if (int1flag)
        {
-         printf_UART ("\n INT1 interrupt !");
+         printf (" \n\r  INT1 interrupt !  \n\r ");
          int1flag = 0;
        }
     }

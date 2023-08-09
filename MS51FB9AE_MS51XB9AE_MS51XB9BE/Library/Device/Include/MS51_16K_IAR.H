@@ -3,7 +3,7 @@
 /*                                                                          */
 /* Header file for Nuvoton MS51 IAR format                                  */
 /* -------------------------------------------------------------------------*/
-#include "SFR_Macro_MS51_16K.h"
+#include "sfr_macro_ms51_16k_iar.h"
 
 /*  BYTE Registers  */
 /*  SFR page 0      */

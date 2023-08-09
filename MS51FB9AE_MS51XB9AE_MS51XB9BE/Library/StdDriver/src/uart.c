@@ -4,16 +4,12 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_16k_iar.h"
 
-/***********************************************************************************************************/
-/*  Website: http://www.nuvoton.com                                                                        */
-/*  E-Mail : MicroC-8bit@nuvoton.com                                                                       */
-/*  Date   : Jan/21/2020                                                                                   */
-/***********************************************************************************************************/
-#include "MS51_16K_IAR.H"
 BIT PRINTFG, uart0_receive_flag, uart1_receive_flag;
 unsigned char uart0_receive_data, uart1_receive_data;
 
+#if 0
 /* UART0 interrupt vector */
 #pragma vector=0x23
 __interrupt void SerialPort0_ISR(void){
@@ -61,6 +57,7 @@ __interrupt void SerialPort1_ISR(void){
 
     _pop_(SFRS);
 }
+#endif 
 
 /*MS51 new version buadrate */
 void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long u32Baudrate)
@@ -97,7 +94,7 @@ void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long
   }
 }
 
-#if 0 
+#if 1
 unsigned char Receive_Data(unsigned char UARTPort)
 {
     UINT8 c;

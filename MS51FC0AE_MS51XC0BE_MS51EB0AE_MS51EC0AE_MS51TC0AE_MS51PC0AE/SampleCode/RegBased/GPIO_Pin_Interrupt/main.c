@@ -9,7 +9,7 @@
 /************************************************************************************************************/
 /*  File Function: MS51 pin interrupt demo                                                                  */
 /************************************************************************************************************/
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 unsigned char PinIntFlag;
 
@@ -41,7 +41,7 @@ void main (void)
   /* UART0 initial for printf */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART("\n PIT test start!");
+    printf(" \n\r  PIT test start!");
   /* Disable BOD for power down current */
     BOD_DISABLE;
 
@@ -67,8 +67,8 @@ void main (void)
 
       switch(PinIntFlag)
       {
-        case (SET_BIT0): printf_UART("\n PIT0 interrupt!"); PinIntFlag&=CLR_BIT0; break;
-        case (SET_BIT2): printf_UART("\n PIT2 interrupt!"); PinIntFlag&=CLR_BIT2; break;
+        case (SET_BIT0): printf(" \n\r  PIT0 interrupt!"); PinIntFlag&=CLR_BIT0; break;
+        case (SET_BIT2): printf(" \n\r  PIT2 interrupt!"); PinIntFlag&=CLR_BIT2; break;
         default: break;
       }
     }

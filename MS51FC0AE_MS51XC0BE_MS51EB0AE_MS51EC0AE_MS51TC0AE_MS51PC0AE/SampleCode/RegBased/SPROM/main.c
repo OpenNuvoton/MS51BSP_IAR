@@ -9,8 +9,8 @@
 //***********************************************************************************************************
 //  File Function: MS51 locate data in APROM simple demo 
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
-#include "SPROM.h"
+#include "ms51_32k_iar.h"
+#include "sprom_code.h"
 
 __code const char lockdata@0xFFFF = 0x00;  /* This byte as 0xFF means unlock SPROM. Any other value is lock*/
 
@@ -21,14 +21,16 @@ void main (void)
     unsigned char temp;
     
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    
     set_IAPUEN_SPMEN;             //Enable SPROM memory mapping only for check SPROM in memory window
     UART_Open(24000000,UART0_Timer1,115200);
-    printf_UART("\n SPROM lock byte = 0x%x ", lockdata);
+    printf(" \n\r  SPROM lock byte = 0x%x ", lockdata);
     while(1)
     {
       temp = SPROM_FUNC(SPTEMP);
       ENABLE_UART0_PRINTF;
-      printf_UART("\n SPTEMP= 0x%x", temp);
+      printf(" \n\r  SPTEMP= 0x%x", temp);
       DISABLE_UART0_PRINTF;
       Timer0_Delay(24000000,300,1000);
     }

@@ -4,8 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /**
   * @brief      Enable specify I2C controller and set divider

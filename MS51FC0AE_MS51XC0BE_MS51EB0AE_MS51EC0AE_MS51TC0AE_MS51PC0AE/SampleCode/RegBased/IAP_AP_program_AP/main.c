@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 IAP erase / program / read verify demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 //---------------------------------------------------------------
 // Following define by customer
@@ -27,8 +27,8 @@ void main (void)
        IAPDataBuf[i] = i;
     }
 
-    P35_QUASI_MODE;
-    while (P35);
+    GPIO_LED_QUASI_MODE;;
+    while (GPIO_LED);
   
     Erase_APROM(0x4700,1024);
     Erase_Verify_APROM(0x4700,1024);

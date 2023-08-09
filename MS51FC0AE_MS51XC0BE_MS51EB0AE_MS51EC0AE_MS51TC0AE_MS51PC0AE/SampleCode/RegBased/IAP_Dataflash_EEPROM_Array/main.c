@@ -5,7 +5,7 @@
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
 
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 struct
 {
@@ -31,7 +31,7 @@ void main(void)
     
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART("\n Flash as EEPROM demo...Toggle P01 to Low" );
+    printf(" \n\r  Flash as EEPROM demo...Toggle P01 to Low" );
 
     P01_QUASI_MODE;
     while (P01);
@@ -54,7 +54,7 @@ void main(void)
 
     /*call read byte */
     temp = Read_APROM_BYTE((unsigned int __code *)0x38FD);
-    printf_UART("\n Data flash 0x38FD = 0x%x", temp);
+    printf(" \n\r  Data flash 0x38FD = 0x%x", temp);
     
     while (1);
 }

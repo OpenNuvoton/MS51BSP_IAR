@@ -4,12 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-
-//***********************************************************************************************************
-//  File Function: MS51 ADC PWM trig convert demo code
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
 
 /******************************************************************************
  * FUNCTION_PURPOSE: ADC interrupt Service Routine
@@ -20,7 +16,7 @@ __interrupt void ADC_ISR (void){
 _push_(SFRS);
   
     clr_ADCCON0_ADCF;                       // Clear ADC interrupt flag
-    P30 ^= 1;                                // Check the P3.0 toggle at falling edge of PWM
+    GPIO_LED ^= 1;                                // Check the P3.0 toggle at falling edge of PWM
 
 _pop_(SFRS);
 }
@@ -31,8 +27,7 @@ here after stack initialization.
 ******************************************************************************/
 void main (void) 
 {
-    ALL_GPIO_QUASI_MODE;
-
+    GPIO_LED_QUASI_MODE;
 /*-------------------------------------------------
   ADC trig initial setting
   Please modify #if value to open diffent type

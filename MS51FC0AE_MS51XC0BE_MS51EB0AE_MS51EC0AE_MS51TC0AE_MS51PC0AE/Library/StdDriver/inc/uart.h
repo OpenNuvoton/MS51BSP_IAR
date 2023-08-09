@@ -4,8 +4,8 @@
 #define UART0 0
 #define UART1 1
 
- extern   unsigned char  PRINTFG,uart0_receive_flag,uart1_receive_flag;
- extern   unsigned char uart0_receive_data,uart1_receive_data;
+extern   BIT PRINTFG,uart0_receive_flag,uart1_receive_flag;
+extern   unsigned char uart0_receive_data,uart1_receive_data;
 
 void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long u32Baudrate);
 void UART_Send_Data(unsigned char UARTPort, unsigned char c);

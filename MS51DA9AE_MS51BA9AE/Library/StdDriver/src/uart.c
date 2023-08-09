@@ -4,13 +4,9 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-/***********************************************************************************************************/
-/*  Website: http://www.nuvoton.com                                                                        */
-/*  E-Mail : MicroC-8bit@nuvoton.com                                                                       */
-/*  Date   : June/21/2020                                                                                   */
-/***********************************************************************************************************/
-#include "MS51_8K_IAR.h"
+
 BIT PRINTFG,uart0_receive_flag,uart1_receive_flag;
 unsigned char uart0_receive_data,uart1_receive_data;
 
@@ -100,7 +96,7 @@ void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long
 #if 0 
 unsigned char Receive_Data(unsigned char UARTPort)
 {
-    UINT8 c;
+    uint8_t c;
     switch (UARTPort)
     {
       case UART0:
@@ -118,7 +114,7 @@ unsigned char Receive_Data(unsigned char UARTPort)
 }
 #endif
 
-void UART_Send_Data(UINT8 UARTPort, UINT8 c)
+void UART_Send_Data(uint8_t UARTPort, uint8_t c)
 {
     DISABLE_UART0_INTERRUPT;
     switch (UARTPort)
@@ -143,6 +139,7 @@ void Enable_UART0_VCOM_printf_24M_115200(void)
     DISABLE_UART0_INTERRUPT;
 }
 
+#if 0
 void printf_UART(unsigned char *str, ...);
 
 void printInteger(unsigned long u32Temp)
@@ -212,3 +209,4 @@ void printf_UART(unsigned char *str, ...)
         UART_Send_Data(UART0,*str++);
     }
 }
+#endif

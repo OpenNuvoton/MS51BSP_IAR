@@ -4,8 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 /**
  * @brief       PWM indepedent mode PWM0 channel 0~5 output demo and reload PWM0_CH0 every 3s.
@@ -19,7 +18,7 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
+    printf ("\n\r Test start ...\n\r");
 /* PWM0 initial setting  
    * include pwm.c in Library for PWM mode setting
    @note: the period setting of all PWM0 should be same, for example following 0x6FF.
@@ -53,10 +52,10 @@ void main (void)
       Timer2_Delay(24000000,128,3000,1000);
       PWM0_ConfigOutputChannel(0,Independent,EdgeAligned,0x6FF,90);
       PWM0_Reload();
-      printf_UART ("\n PWM channel 0 duty change to 90 percent !");
+      printf (" \n\r  PWM channel 0 duty change to 90 percent !  \n\r ");
       Timer2_Delay(24000000,128,3000,1000);
       PWM0_ConfigOutputChannel(0,Independent,EdgeAligned,0x6FF,10);
-      printf_UART ("\n PWM channel 0 duty change to 10 percent!");
+      printf (" \n\r  PWM channel 0 duty change to 10 percent! \n\r ");
       PWM0_Reload();
     }      
 }

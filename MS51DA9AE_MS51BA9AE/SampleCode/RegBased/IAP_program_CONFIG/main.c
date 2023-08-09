@@ -4,11 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-//***********************************************************************************************************
-//  File Function: MS51 IAP program LDROM demo code
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
+#include "ms51_8k_iar.h"
 
 
 /*---------------------------------------------------------------
@@ -19,9 +15,9 @@
 void main (void) 
 {
     MODIFY_HIRC(HIRC_24);
-    P17_QUASI_MODE;
+    GPIO_LED_QUASI_MODE;
   
-    while(P17);
+    while(GPIO_LED);
 
     if(PCON&SET_BIT4)        /* Check with power on flag. Only the first power on check with CONFIG */
     {

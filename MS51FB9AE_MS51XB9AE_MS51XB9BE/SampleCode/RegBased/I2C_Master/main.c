@@ -4,9 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-#include "MS51_16K_IAR.H"
+#include "ms51_16k_iar.h"
 
 
 #define I2C_CLOCK                 13

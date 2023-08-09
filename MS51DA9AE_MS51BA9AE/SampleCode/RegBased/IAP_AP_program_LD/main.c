@@ -4,12 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-//***********************************************************************************************************
-//  File Function: MS51 IAP program LDROM demo code
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
-
+#include "ms51_8k_iar.h"
 
 
 void main (void) 
@@ -17,9 +12,7 @@ void main (void)
     unsigned char i;
     
     MODIFY_HIRC(HIRC_24);
-    
-    P17_QUASI_MODE;
-    P17=1;
+    GPIO_LED_QUASI_MODE;
   
 /*Modify CONFIG Enable LDROM, LDROM size is 2k*/
     Modify_CONFIG(0xEF,0xFD,0xFF,0xFF,0xFF);
@@ -31,7 +24,7 @@ void main (void)
     }
 		
 /* Only when P1.7 to low to program LDROM process*/
-    while (P17);
+    while (GPIO_LED);
     Erase_LDROM(0,128);
     Erase_Verify_LDROM(0,128);
     Program_LDROM(0,128);

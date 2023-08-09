@@ -4,15 +4,30 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-/************************************************************************************************************/
-/*  File Function: MS51 UART1 with interrupt demo                                                           */
-/************************************************************************************************************/
-#include "MS51_16K_IAR.H"
-
+#include "ms51_16k_iar.h"
 unsigned char  UART_BUFFER;
 
+#pragma vector=0x7B
+__interrupt void SerialPort1_ISR(void){
+    _push_(SFRS);
+  
+    if (RI_1)
+    {
+        uart1_receive_data = SBUF_1;
+        uart1_receive_flag = 1;
+        clr_SCON_1_RI_1;                             /* clear reception flag for next reception */
+    }
+
+    if (TI_1 == 1)
+    {
+        if (!PRINTFG)
+        {
+            clr_SCON_1_TI_1;                             /* if emission occur */
+        }
+    }
+
+    _pop_(SFRS);
+}
 /****************************************************************************************************************
  * FUNCTION_PURPOSE: Main function 
   
@@ -24,7 +39,10 @@ unsigned char  UART_BUFFER;
  ***************************************************************************************************************/
 void main (void)
 {
-    P12_PUSHPULL_MODE;    // For I/O toggle display
+    MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    Enable_UART0_VCOM_printf_24M_115200();
+    printf ("\n\r Remove Nu-link and not in debug mode .\n\r");
 /* Modify HIRC to 24MHz for UART baud rate deviation not over 1%*/
     MODIFY_HIRC(HIRC_24);
     P16_QUASI_MODE;
@@ -37,7 +55,7 @@ void main (void)
     {
       if (uart1_receive_flag)
       {
-          P12 ^= 1;      //Receive each byte P12 toggle, never work under debug mode
+          GPIO_LED ^= 1;      //Receive each byte P12 toggle, never work under debug mode
           UART_Send_Data(UART1,uart1_receive_data);
           uart1_receive_flag = 0;
       }

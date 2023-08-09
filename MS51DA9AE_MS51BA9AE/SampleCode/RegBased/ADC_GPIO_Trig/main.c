@@ -4,13 +4,7 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 ADC trig by GPIO demo
-//***********************************************************************************************************
-#include "MS51_8K_IAR.h"
-
+#include "ms51_8k_iar.h"
 
 BIT adcintflag;
 /******************************************************************************
@@ -36,8 +30,8 @@ void main (void)
   /* UART0 settting for printf function */
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART ("\n Test start ...");
-    printf_UART ("\n Toggle P04 to low to start ADC ...");
+    printf ("\n Test start ...");
+    printf ("\n Toggle P04 to low to start ADC ...");
 
 /*---------------------------------------------------------------
   ADC port trig initial setting toggle P0.4 to start ADC 
@@ -53,7 +47,7 @@ void main (void)
     {
       if (adcintflag)
       {
-            printf_UART ("\n Value = 0x%x",ADCRH);
+            printf ("\n Value = 0x%x",ADCRH);
             adcintflag =0;
       }
     }

@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 Timer 0 mode 3 demo
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 /* if define TIMER0_FSYS_DIV12, Timer0 = (256-56)*12/16MHz = 150us ,    */
 /*                                 Timer1 = (256-200)*12/16MHz = 42us , */
@@ -37,9 +37,11 @@ __interrupt void Timer0_ISR(void){
 __interrupt void Timer1_ISR(void){
   
     _push_(SFRS);
-                
+
+    SFRS = 0;
     TH0 = TH0_INIT;
     TF1=0;
+    GPIO_LED ^= 1;
   
     _pop_(SFRS);
 }
@@ -50,6 +52,8 @@ __interrupt void Timer1_ISR(void){
 void main (void)
 {
     MODIFY_HIRC(HIRC_24);
+    GPIO_LED_QUASI_MODE;
+    
     ENABLE_TIMER0_MODE3;
     TIMER0_FSYS;
   

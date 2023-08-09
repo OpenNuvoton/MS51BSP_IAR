@@ -9,14 +9,13 @@
 //***********************************************************************************************************
 //  File Function: MS51 locate data in APROM simple demo 
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
-#include "SPROM.h"
+#include "ms51_32k_iar.h"
+#include "sprom_code.h"
 
 /* SPROM area address define in .xcl file */
 unsigned char SPROM_FUNC(unsigned char unused)  @ "SPROM_C"
 {
-  P35_PUSHPULL_MODE;
-  P35 = ~P35;
+  GPIO_LED ^= 1;
   SPTEMP++;
   return SPTEMP;
 }

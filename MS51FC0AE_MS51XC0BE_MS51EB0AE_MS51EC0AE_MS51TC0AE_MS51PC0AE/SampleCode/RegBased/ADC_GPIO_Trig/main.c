@@ -8,7 +8,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 ADC trig by GPIO demo
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 unsigned  char ADCINTFLAG=0;
 /******************************************************************************
@@ -31,7 +31,7 @@ void main (void)
 {
     MODIFY_HIRC(HIRC_24);
     Enable_UART0_VCOM_printf_24M_115200();
-    printf_UART("\n ADC Trig by IO Initial");
+    printf(" \n\r  ADC Trig by IO Initial \n\r");
 /*---------------------------------------------------------------*/
 /* ADC port trig initial setting toggle P0.4 to start ADC        */
 /*---------------------------------------------------------------*/
@@ -48,10 +48,9 @@ void main (void)
     {
       if(ADCINTFLAG)                                      // Wait ADC interrupt
       {
-          printf_UART("\n ADCRH Value = 0x%x",ADCRH);
-          _delay_();_delay_();_delay_();_delay_();_delay_();
-          printf_UART(" ADCRL Value = 0x%x",ADCRL);
-          _delay_();_delay_();_delay_();_delay_();_delay_();
+          printf(" \n\r  ADCRH Value = 0x%x",ADCRH);
+          printf(" ADCRL Value = 0x%x",ADCRL);
+
           ADCINTFLAG = 0;
       }
     }

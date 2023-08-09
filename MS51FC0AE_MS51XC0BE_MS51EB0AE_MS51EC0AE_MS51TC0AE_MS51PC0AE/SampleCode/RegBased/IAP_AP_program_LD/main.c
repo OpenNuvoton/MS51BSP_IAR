@@ -9,7 +9,7 @@
 //***********************************************************************************************************
 //  File Function: MS51 IAP program LDROM demo code
 //***********************************************************************************************************
-#include "MS51_32K_IAR.h"
+#include "ms51_32k_iar.h"
 
 void main (void) 
 {
@@ -22,8 +22,8 @@ void main (void)
     }
 
     /* Only when P3.5 to low to program LDROM process*/
-    P35_QUASI_MODE;
-    while (P35);
+    GPIO_LED_QUASI_MODE;
+    while (GPIO_LED);
     
 /*Modify CONFIG to Enable LDROM, LDROM size is 2k*/
     Modify_CONFIG(0xEF,0xFD,0xFF,0xFF,0xFF);

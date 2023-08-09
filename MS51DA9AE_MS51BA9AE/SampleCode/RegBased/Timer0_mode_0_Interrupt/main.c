@@ -4,13 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-/************************************************************************************************************/
-
-/************************************************************************************************************/
-/*  File Function: MS51 Timer 1 mode 0 with interrupt demo                                                  */
-/************************************************************************************************************/
-#include "MS51_8K_IAR.h"
 
 /* if define TIMER0_FSYS_DIV12, timer = (0x1FFF-0x1000)*12/24MHz = 4.08ms */
 /* if define TIMER0_FSYS, timer = (0x1FFF-0x0010)/24MHz = 340us */
@@ -24,11 +19,12 @@
 __interrupt void Timer0_ISR(void){
   
     _push_(SFRS);
-  
+
+    SFRS=0;
     TH0 = TH0_INIT;
     TL0 = TL0_INIT;
     TF0 = 0 ;
-    P17 = ~P17;                              /* GPIO toggle when interrupt  */
+    GPIO_LED ^= 1;                              /* GPIO toggle when interrupt  */
 
     _pop_(SFRS);
 }	
@@ -39,7 +35,7 @@ __interrupt void Timer0_ISR(void){
 void main (void)
 {
 
-    P17_PUSHPULL_MODE;
+    GPIO_LED_QUASI_MODE;
 
     ENABLE_TIMER1_MODE0;                           /* Timer 0 mode configuration */
     TIMER0_FSYS_DIV12;

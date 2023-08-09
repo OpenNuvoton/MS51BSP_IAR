@@ -4,32 +4,8 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
+#include "ms51_8k_iar.h"
 
-/************************************************************************************************************/
-/*  File Function: MS51 PWM insert dead time demo code                                                      */
-/************************************************************************************************************/
-#include "MS51_8K_IAR.h"
-
-
-/*PWM deadtime define */
-void PWM0_DEAD_TIME_VALUE(unsigned int  DeadTimeData)
-{
-  unsigned char deadtmphigh,deadtmplow;
-  deadtmplow = DeadTimeData;
-  deadtmphigh = DeadTimeData>>8;
-  BIT_TMP = EA;
-  EA = 0;
-  if (deadtmphigh==0x01)
-  {
-    TA = 0xAA;
-    TA = 0x55;
-    PDTEN|=0x10;
-  }
-  TA = 0xAA;
-  TA = 0x55;
-  PDTCNT = deadtmplow;
-  EA = BIT_TMP;
-}
 
 /************************************************************************************************************/
 /*    Main function                                                                                         */
@@ -76,8 +52,8 @@ void main(void)
     
     ENABLE_PWM0_CH23_DEADTIME;
     ENABLE_PWM0_CH45_DEADTIME;
-    PWM0_DEAD_TIME_VALUE(0x1FF);      //value never over 0x1FF
-    
+    PWM0_DeadZoneEnable(PWM0_CH01,0x100); //value never over 0x1FF
+
 //Please always setting Dead time if needed before PWM run.    
     set_PWMCON0_LOAD;
     set_PWMCON0_PWMRUN;
