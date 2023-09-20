@@ -33,12 +33,13 @@ extern  __data volatile uint8_t count;
 extern  __data volatile uint16_t g_timer0Counter;
 extern  __data volatile uint32_t g_checksum;
 extern  __data volatile uint32_t g_totalchecksum;
-extern  __data volatile uint8_t bI2CDataReady;
-extern  __data volatile uint8_t bISPDataReady;//for ack
 extern  __data volatile uint8_t g_u8SlvDataLen;
-extern  __data volatile uint8_t g_timer0Over;
-extern  __data volatile uint8_t g_timer1Over;
-extern  __data volatile uint8_t g_progarmflag;
+extern  BIT bI2CDataReady;
+extern  BIT bISPDataReady;//for ack
+extern  BIT g_timer0Over;
+extern  BIT g_timer1Over;
+extern  BIT g_progarmflag;
+extern  BIT BIT_TMP;
 
 extern unsigned char __data PID_highB,PID_lowB,DID_highB,DID_lowB,CONF0,CONF1,CONF2,CONF4;
 extern unsigned char __data recv_CONF0,recv_CONF1,recv_CONF2,recv_CONF4;

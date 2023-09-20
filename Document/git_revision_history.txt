@@ -38,3 +38,9 @@
 
 2023/05
 1. All                           Modified all project default memory as Large model.
+
+2023/08
+1. All                           Added PowerManagement folder. all py checked.
+
+2023/09
+1. MS51_32K                      Added UART1 ~ UART4 printf function.

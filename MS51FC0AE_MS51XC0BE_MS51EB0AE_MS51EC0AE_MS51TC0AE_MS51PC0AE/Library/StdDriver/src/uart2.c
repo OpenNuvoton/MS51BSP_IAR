@@ -7,15 +7,23 @@
 #include "ms51_32k_iar.h"
 
 
-unsigned char uart2rvbuffer=0;
-unsigned char uart2rvflag;
+unsigned char uart2rvbuffer;
+BIT uart2rvflag;
 
-#if 0 
+/**
+ * @brief       SC0 / UART2 interrupt  vector demo
+ * @param       None
+ * @return      None
+ * @details     UART2 send received data loop.
+ */
+#if 0
 #pragma vector=0xAB
 __interrupt void SC0_ISR(void){
-/* Since only enable receive interrupt, not add flag check */
+    PUSH_SFRS;
         uart2rvflag = 1;
+        SFRS = 2;
         uart2rvbuffer = SC0DR;
+    POP_SFRS;
 }
 #endif
 /**
@@ -41,27 +49,6 @@ void UART2_Open(unsigned long u32SysClock, unsigned long u32Baudrate)
     SC0CR1&=0xCF;        //datalegth 8bit
     set_SC0CR0_NSB;      //stop bit = 1bit
 }
-
-/****************************************************************************************************************/  
-/**** UART Receive data without interrupt                                                                       */
-/**** For example: UART_Open(UART0_Timer1,1200)                                                                 */
-/****************************************************************************************************************/ 
-//void UART2_Receive_10byte(void)
-//{  
-//  set_SC0IE_RDAIEN;
-//  BIT_TMP = EA;
-//  EA = 1;
-//  while (uart2rvlength!=10)
-//  {
-//    if (uart2rvflag)
-//    {
-//      uart2buffer[uart2rvlength]= SC0DR;
-//    }
-//    uart2rvflag=0;
-//  }
-//  uart2rvlength = 0;
-//  EA = BIT_TMP;
-//}
 
 /**
  * @brief       UART2 receive data without interrupt 
@@ -90,7 +77,7 @@ void UART2_Send_Data(unsigned char c)
 {
       clr_SC0CR0_TXOFF;
       SC0DR = c;
-      while(!(SC0TSR|SET_BIT3));
+      while(!(SC0TSR&SET_BIT3));
       clr_SC0CR0_TXOFF;
 }
 

@@ -4,11 +4,6 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: MS51 SPI in Slave mode demo code
-//***********************************************************************************************************
 #include "ms51_32k_iar.h"
 
 /* For printf code only. Disable this define to reduce code size. */
@@ -27,7 +22,6 @@ void SPI_Error(void)
 //-----------------------------------------------------------------------------------------------------------
 void SPI_Initial(void)
 { 
-  
     P15_QUASI_MODE;                                  //P15 (SS) Quasi mode
     P10_QUASI_MODE;                                  //P10 (SPCLK) Quasi mode
     P00_QUASI_MODE;                                  //P00 (MOSI) Quasi mode

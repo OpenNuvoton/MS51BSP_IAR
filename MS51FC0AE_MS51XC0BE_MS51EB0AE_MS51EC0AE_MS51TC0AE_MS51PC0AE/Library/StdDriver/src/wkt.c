@@ -14,11 +14,11 @@
 #pragma vector=0x8B
 __interrupt void WKT_ISR(void){
   
-_push_(SFRS);
+PUSH_SFRS;
 
     clr_WKCON_WKTF;
 
-_pop_(SFRS);
+POP_SFRS;
 }
 #endif
 

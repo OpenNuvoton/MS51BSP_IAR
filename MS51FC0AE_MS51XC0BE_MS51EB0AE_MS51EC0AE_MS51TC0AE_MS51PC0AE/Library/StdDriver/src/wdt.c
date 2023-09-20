@@ -15,9 +15,9 @@
  */
 #pragma vector=0x53
 __interrupt void WDT_ISR(void){
-  _push_(SFRS);
+  PUSH_SFRS;
     clr_WDCON_WDTF;
-  _pop_(SFRS);
+  POP_SFRS;
 }
 #endif
 

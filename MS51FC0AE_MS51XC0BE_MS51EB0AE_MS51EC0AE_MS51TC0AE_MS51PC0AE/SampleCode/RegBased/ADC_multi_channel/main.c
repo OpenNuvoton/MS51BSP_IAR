@@ -39,10 +39,10 @@ void main (void)
       DISABLE_ADC;
 
   /*printf must in SFR page 0 */
-     _push_(SFRS);
+     PUSH_SFRS;
      SFRS = 0;
      printf(" \n\r  ADC channel 5 = %x", ADCdataAIN5);
-    _pop_(SFRS);
+    POP_SFRS;
 
 
   /*Enable Bandgap */
@@ -60,10 +60,10 @@ void main (void)
       ADCdataVBG |= (ADCRL&0x0F);
 
   /*printf must in SFR page 0 */
-     _push_(SFRS);
+     PUSH_SFRS;
      SFRS = 0;
      printf(" \n\r  ADC channel bandgap = %x", ADCdataVBG);
-    _pop_(SFRS);
+    POP_SFRS;
 
     while(1);
 }

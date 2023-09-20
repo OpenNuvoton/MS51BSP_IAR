@@ -21,10 +21,10 @@ __data volatile uint8_t count;
 __data volatile uint16_t g_timer0Counter;
 __data volatile uint32_t g_checksum;
 __data volatile uint32_t g_totalchecksum;
-__data volatile uint8_t bUartDataReady;
-__data volatile uint8_t g_timer0Over;
-__data volatile uint8_t g_timer1Over;
-__data volatile uint8_t g_programflag;
+BIT bUartDataReady;
+BIT g_timer0Over;
+BIT g_timer1Over;
+BIT g_programflag;
 BIT BIT_TMP;
 
 unsigned char PID_highB, PID_lowB, DID_highB, DID_lowB, CONF0, CONF1, CONF2, CONF4;
@@ -141,13 +141,15 @@ void UART0_ini_115200_24MHz(void)
 
 void Package_checksum(void)
 {
-    g_checksum = 0;
-
+    uint32_t   temp32;
+    
+    temp32 = 0;
     for (count = 0; count < 64; count++)
     {
-        g_checksum = g_checksum + uart_rcvbuf[count];
+        temp32 = temp32 + uart_rcvbuf[count];
     }
-
+    g_checksum = temp32;
+    
     uart_txbuf[0] = g_checksum & 0xff;
     uart_txbuf[1] = (g_checksum >> 8) & 0xff;
     uart_txbuf[4] = uart_rcvbuf[4] + 1;
@@ -173,12 +175,16 @@ void Send_64byte_To_UART0(void)
 
 #pragma vector=0x23
 __interrupt void UART0_ISR(void){
-  
-    _push_(SFRS);
+    uint8_t  temp8;
+    
+  PUSH_SFRS;
 
     if (RI == 1)
     {
-        uart_rcvbuf[bufhead++] =  SBUF;
+//        uart_rcvbuf[bufhead++] =  SBUF;
+        temp8 = bufhead;
+        uart_rcvbuf[temp8++] =  SBUF;
+        bufhead++;
         clr_SCON_RI;                                         // Clear RI (Receive Interrupt).
     }
     if (TI == 1)
@@ -197,13 +203,13 @@ __interrupt void UART0_ISR(void){
         g_timer1Over = 0;
         bufhead = 0;
     }
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 #pragma vector=0x0B
 __interrupt void Timer0_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
     if (g_timer0Counter)
     {
         g_timer0Counter--;
@@ -220,5 +226,5 @@ __interrupt void Timer0_ISR(void){
             g_timer1Over = 1;
         }
     }
-    _pop_(SFRS);
+    POP_SFRS;
 }

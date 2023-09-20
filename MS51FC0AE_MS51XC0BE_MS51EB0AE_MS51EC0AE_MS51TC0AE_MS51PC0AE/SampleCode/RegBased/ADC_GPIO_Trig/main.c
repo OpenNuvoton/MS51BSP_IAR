@@ -17,10 +17,10 @@ unsigned  char ADCINTFLAG=0;
 #pragma vector=0x5B
 __interrupt void ADC_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
     clr_ADCCON0_ADCF;                               //clear ADC interrupt flag
     ADCINTFLAG = 1;
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 /******************************************************************************

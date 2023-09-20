@@ -19,7 +19,7 @@ Pin interrupt subroutine.
 #pragma vector=0x3B
 __interrupt void PIT_ISR(void){
   
-_push_(SFRS);
+PUSH_SFRS;
 
     SFRS = 0;
     switch(PIF)
@@ -29,7 +29,7 @@ _push_(SFRS);
       default: break;
     }
 
-_pop_(SFRS);
+POP_SFRS;
 }
 
 /******************************************************************************

@@ -16,8 +16,6 @@
 /***********************************************************************/
 #include "ms51_32k_iar.h"
 
-
-
 /*
  * putchar (mini version): outputs charcter only
  */
@@ -37,9 +35,28 @@ int putchar (int c)  {
   UART_Send_Data(UART0,c);
   return (c);
 }
-#else
+#endif
+#if 0
 int putchar (int c)  {
   UART_Send_Data(UART1,c);
+  return (c);
+}
+#endif
+#if 0
+int putchar (int c)  {
+  UART2_Send_Data(c);
+  return (c);
+}
+#endif
+#if 0
+int putchar (int c)  {
+  UART3_Send_Data(c);
+  return (c);
+}
+#endif
+#if 0
+int putchar (int c)  {
+  UARTr_Send_Data(c);
   return (c);
 }
 #endif

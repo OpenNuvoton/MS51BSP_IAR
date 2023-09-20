@@ -25,14 +25,14 @@ unsigned char __data TH0TMP,TL0TMP,TH1TMP,TL1TMP;
 #if 0   /* Interrup Vector demo */
 #pragma vector=0x0B                             /* interrupt 1 */
 __interrupt void Timer0_ISR(void){
-_push_(SFRS);
+PUSH_SFRS;
       SFRS = 0;
 /* following setting for reload Timer 0 counter */
       TH0 = TH0TMP;
       TL0 = TL0TMP;
 /* following clear flag for next interrupt */
       clr_TCON_TF0;
-_pop_(SFRS);
+POP_SFRS;
 }
 #endif
 
@@ -72,13 +72,13 @@ void  Timer0_AutoReload_Interrupt_CounterClear(void)
 #if 0
 #pragma vector=0x1B                             /* interrupt 3 */
 __interrupt void Timer1_ISR(void){
-    _push_(SFRS);
+    PUSH_SFRS;
 /* following setting for reload Timer 0 counter, this is must for next time*/
       TH1 = TH1TMP;
       TL1 = TL1TMP;
 /* following clear flag is necessary for next time */
       clr_TCON_TF1;
-    _pop_(SFRS);
+    POP_SFRS;
 }
 #endif
 
@@ -113,9 +113,9 @@ void Timer1_AutoReload_Interrupt_Initial(unsigned char u8SYSCLK, unsigned long u
 #if 0    
 #pragma vector=0x2B                             /* interrupt 5 */
 __interrupt void Timer2_ISR(void){
-_push_(SFRS);
+PUSH_SFRS;
     clr_T2CON_TF2;
-_pop_(SFRS);
+POP_SFRS;
 }
 #endif
 
@@ -148,9 +148,9 @@ void Timer2_AutoReload_Interrupt_Initial(unsigned char u8SYSCLK, unsigned long u
 #if 0
 #pragma vector=0x83                             /* interrupt 16 */
 __interrupt void Timer3_ISR(void){
-_push_(SFRS);
+PUSH_SFRS;
     clr_T3CON_TF3;
-_pop_(SFRS);
+POP_SFRS;
 }
 #endif 
 

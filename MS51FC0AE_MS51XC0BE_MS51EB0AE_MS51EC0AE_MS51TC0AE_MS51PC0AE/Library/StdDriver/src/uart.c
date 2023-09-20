@@ -10,11 +10,17 @@
 BIT PRINTFG,uart0_receive_flag,uart1_receive_flag;
 unsigned char uart0_receive_data,uart1_receive_data;
 
+/**
+ * @brief       UART0 interrupt vector demo
+ * @param       None
+ * @return      None
+ * @details     UART0 store received data.
+ */
 #if 0
 #pragma vector=0x23
 __interrupt void UART0_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
     
       if (RI)
     {   
@@ -30,12 +36,20 @@ __interrupt void UART0_ISR(void){
       }
     }
 
-    _pop_(SFRS);
+    POP_SFRS;
 }
+#endif 
 
+/**
+ * @brief       UART1 interrupt vector demo
+ * @param       None
+ * @return      None
+ * @details     UART1 store received data.
+ */
+#if 0
 #pragma vector=0x7B
 __interrupt void SerialPort1_ISR(void){
-    _push_(SFRS);
+    PUSH_SFRS;
   
     if (RI_1==1) 
     {                                       
@@ -51,7 +65,7 @@ __interrupt void SerialPort1_ISR(void){
       }  
     }
 
-    _pop_(SFRS);
+    POP_SFRS;
 }
 #endif 
 /*MS51 new version buadrate */
@@ -68,7 +82,7 @@ void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long
           clr_T3CON_BRCK;          //Serial port 0 baud rate clock source = Timer1
           TH1 = 256 - (u32SysClock/16/u32Baudrate);
           set_TCON_TR1;
-//          set_IE_ES;
+          ENABLE_UART0_INTERRUPT;
       break;
       
       case UART0_Timer3:
@@ -80,7 +94,7 @@ void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long
           RH3    = HIBYTE(65536 - (u32SysClock/16/u32Baudrate));  
           RL3    = LOBYTE(65536 - (u32SysClock/16/u32Baudrate));  
           set_T3CON_TR3;         //Trigger Timer3
-          set_IE_ES;
+          ENABLE_UART0_INTERRUPT;
       break;
       
       case UART1_Timer3:
@@ -91,10 +105,10 @@ void UART_Open(unsigned long u32SysClock, unsigned char u8UARTPort,unsigned long
           RH3    = HIBYTE(65536 - (u32SysClock/16/u32Baudrate));  
           RL3    = LOBYTE(65536 - (u32SysClock/16/u32Baudrate));     
           set_T3CON_TR3;             //Trigger Timer3
-          set_EIE1_ES_1;
+          ENABLE_UART1_INTERRUPT;
       break;
   }
- //     ENABLE_GLOBAL_INTERRUPT;
+
 }
 
 unsigned char Receive_Data(unsigned char UARTPort)
@@ -145,6 +159,7 @@ void Enable_UART0_VCOM_printf_24M_115200(void)
     P06_QUASI_MODE;
     UART_Open(24000000,UART0_Timer1,115200);
     ENABLE_UART0_PRINTF;
+    DISABLE_UART0_INTERRUPT;
 }
 void printf_UART(unsigned char *str, ...);
 

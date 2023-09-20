@@ -6,15 +6,27 @@
 /*---------------------------------------------------------------------------------------------------------*/
 #include "ms51_32k_iar.h"
 
-unsigned char uart4rvbuffer=0;
-unsigned char uart4rvflag;
+unsigned char uart4rvbuffer;
+BIT uart4rvflag;
 
+/**
+ * @brief       SC2 / UART4 Interrupt vector demo 
+ * @param       None
+ * @return      None
+ * @details     UART4 store received data.
+ */
+#if 0
 #pragma vector=0xBB
 __interrupt void SC2_UART4_ISR(void){
-  
+    PUSH_SFRS;
         uart4rvflag = 1;
+        SFRS = 2;
         uart4rvbuffer = SC2DR;
+    POP_SFRS;
 }
+#endif
+
+
 /**
  * @brief       UART3 transfer data without interrupt 
  * @param       u32SysClock , define Fsys value(value)

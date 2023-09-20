@@ -17,12 +17,12 @@
 #pragma vector=0x2B
 __interrupt void Timer2_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
   
     clr_T2CON_TF2;                // Clear Timer2 Interrupt Flag 
     GPIO_LED ^= 1;                // LEDR1 toggle when interrupt 
   
-    _pop_(SFRS);
+    POP_SFRS;
 }	
 /************************************************************************************************************
 *    Main function 

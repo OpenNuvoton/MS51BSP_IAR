@@ -15,12 +15,12 @@
 #pragma vector=0x03
 __interrupt void INT0_ISR(void){
 
-    _push_(SFRS);
+    PUSH_SFRS;
   
     clr_TCON_IE0;          //clr int flag wait next falling edge
     GPIO_LED ^= 1;
   
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 

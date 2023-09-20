@@ -43,7 +43,7 @@ unsigned char I2CWOVERFLAG = 0;
 #pragma vector=0x33
 __interrupt void I2C_ISR(void){
   
-  _push_(SFRS);
+  PUSH_SFRS;
   SFRS = 0;
   switch (I2STAT)
     {
@@ -110,7 +110,7 @@ __interrupt void I2C_ISR(void){
     }
 
     I2C0_SI_Check();
-_pop_(SFRS);
+POP_SFRS;
 }
 
 //========================================================================================================

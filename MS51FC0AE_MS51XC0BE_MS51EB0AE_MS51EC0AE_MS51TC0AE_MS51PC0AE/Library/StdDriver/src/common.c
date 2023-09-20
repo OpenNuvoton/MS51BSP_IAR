@@ -23,6 +23,20 @@ unsigned char Read_APROM_BYTE(unsigned int __code *u16_addr)
 }
 
 /**
+ * @brief       Software reset API
+ * @param       None
+ * @return      None 
+ * @details     Call this API to excute software reset
+ * @Note        Before call software reset function, please first confirm PCON define boot from APROM or LDROM
+*/
+void SW_Reset(void)
+{
+    TA = 0xAA;
+    TA = 0x55;
+    set_CHPCON_SWRST;
+}
+
+/**
  * @brief       Loop delay API
  * @param       None
  * @return      None
@@ -39,19 +53,4 @@ void _delay_(void)
        }
     }
 }
-
-/**
- * @brief       Software reset API
- * @param       None
- * @return      None 
- * @details     Call this API to excute software reset
- * @Note        Before call software reset function, please first confirm PCON define boot from APROM or LDROM
-*/
-void SW_Reset(void)
-{
-    TA = 0xAA;
-    TA = 0x55;
-    set_CHPCON_SWRST;
-}
-
 

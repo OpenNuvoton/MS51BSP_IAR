@@ -18,13 +18,13 @@ BIT   wdtintflag;
 #pragma vector=0x53
 __interrupt void WDT_ISR(void){
   
-_push_(SFRS);
+PUSH_SFRS;
 
     CLEAR_WDT_INTERRUPT_FLAG;
     GPIO_LED ^= 1;
     wdtintflag = 1;
     
-_pop_(SFRS);
+POP_SFRS;
 }
 
 /************************************************************************************************************

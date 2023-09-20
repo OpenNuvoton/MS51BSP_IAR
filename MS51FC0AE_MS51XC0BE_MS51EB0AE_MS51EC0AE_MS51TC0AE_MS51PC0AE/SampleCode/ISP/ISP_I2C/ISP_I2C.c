@@ -4,30 +4,25 @@
 /* Copyright(c) 2020 Nuvoton Technology Corp. All rights reserved.                                         */
 /*                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-
-
-//***********************************************************************************************************
-//  File Function: ML51 UART0 ISP subroutine
-//***********************************************************************************************************
 #include "ms51_32k_iar.h"
-#include "ISP_I2C.h"
-BIT  BIT_TMP;
+#include "isp_i2c.h"
 
-  __xdata volatile uint8_t rx_buf[64]; 
-  __xdata volatile uint8_t tx_buf[64];
-  __data volatile uint16_t flash_address; 
-  __data volatile uint16_t AP_size;
-  __data volatile uint8_t g_timer1Counter;
-  __data volatile uint8_t count; 
-  __data volatile uint16_t g_timer0Counter;
-  __data volatile uint32_t g_checksum;
-  __data volatile uint32_t g_totalchecksum;
-  __data volatile uint8_t bI2CDataReady;
-  __data volatile uint8_t bISPDataReady;//for ack
-  __data volatile uint8_t g_u8SlvDataLen;
-  __data volatile uint8_t g_timer0Over;
-  __data volatile uint8_t g_timer1Over;
-  __data volatile uint8_t g_progarmflag;
+__xdata volatile uint8_t rx_buf[64]; 
+__xdata volatile uint8_t tx_buf[64];
+__data volatile uint16_t flash_address; 
+__data volatile uint16_t AP_size;
+__data volatile uint8_t g_timer1Counter;
+__data volatile uint8_t count; 
+__data volatile uint16_t g_timer0Counter;
+__data volatile uint32_t g_checksum;
+__data volatile uint32_t g_totalchecksum;
+__data volatile uint8_t g_u8SlvDataLen;
+BIT bI2CDataReady;
+BIT bISPDataReady;//for ack
+BIT g_timer0Over;
+BIT g_timer1Over;
+BIT g_progarmflag;
+BIT BIT_TMP;
 
 unsigned char __data PID_highB,PID_lowB,DID_highB,DID_lowB,CONF0,CONF1,CONF2,CONF4;
 unsigned char __data recv_CONF0,recv_CONF1,recv_CONF2,recv_CONF4;
@@ -82,11 +77,15 @@ void TM0_ini(void)
 
 void Package_checksum(void)
 {
-  g_checksum=0;
+   uint32_t  temp32;
+   
+   temp32=0;
    for(count=0;count<64;count++)
   {
-    g_checksum =g_checksum+ rx_buf[count];    
+    temp32 = temp32 + rx_buf[count];    
   }
+  g_checksum = temp32;
+  
   tx_buf[0]=g_checksum&0xff;
   tx_buf[1]=(g_checksum>>8)&0xff;
   tx_buf[4]=rx_buf[4]+1;
@@ -138,7 +137,7 @@ void Init_I2C(void)
 __interrupt void I2C_ISR(void){
   
     static uint8_t _bISPDataReady;
-    uint8_t u8data;
+    uint8_t u8data,temp8;
 
     if (I2STAT == 0x60) {                    /* Own SLA+W has been receive; ACK has been return */
         bI2CDataReady = 0;
@@ -149,7 +148,8 @@ __interrupt void I2C_ISR(void){
     } else if (I2STAT == 0x80)                 /* Previously address with own SLA address
                                                    Data has been received; ACK has been returned*/
     {
-        rx_buf[g_u8SlvDataLen] = I2DAT;
+        temp8 = g_u8SlvDataLen;
+        rx_buf[temp8] = I2DAT;
         g_u8SlvDataLen++;
         g_u8SlvDataLen &= 0x3F;
         bI2CDataReady = (g_u8SlvDataLen == 0);
@@ -204,7 +204,8 @@ __interrupt void I2C_ISR(void){
     } else if (I2STAT == 0x88)                 /* Previously addressed with own SLA address; NOT ACK has
                                                    been returned */
     {
-        rx_buf[g_u8SlvDataLen] = I2DAT;
+        temp8 = g_u8SlvDataLen;
+        rx_buf[temp8] = I2DAT;
         g_u8SlvDataLen++;
         bI2CDataReady = (g_u8SlvDataLen == 64);
         g_u8SlvDataLen = 0;

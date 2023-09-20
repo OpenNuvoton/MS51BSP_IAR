@@ -18,7 +18,7 @@
   */
 void PWM123_ClockSource(unsigned char u8PWMNum, unsigned char u8PWMCLKDIV)
 {
-_push_(SFRS);
+PUSH_SFRS;
     switch (u8PWMNum)
     {
       case PWM1: 
@@ -61,7 +61,7 @@ _push_(SFRS);
         }
       break;
       }
-_pop_(SFRS);
+POP_SFRS;
 }
 
  /**
@@ -81,7 +81,7 @@ void PWM123_ConfigOutputChannel(unsigned char u8PWMNum,
                                 unsigned int u16PWMFrequency,
                                 unsigned int u16PWMDutyCycle)
 {
-_push_(SFRS);
+PUSH_SFRS;
   SFRS = 2;
   switch (u8PWMNum)
   {
@@ -158,7 +158,7 @@ _push_(SFRS);
       }
     break;
   }
-_pop_(SFRS);
+POP_SFRS;
 }
 
 void PWM_ALL_RUN()

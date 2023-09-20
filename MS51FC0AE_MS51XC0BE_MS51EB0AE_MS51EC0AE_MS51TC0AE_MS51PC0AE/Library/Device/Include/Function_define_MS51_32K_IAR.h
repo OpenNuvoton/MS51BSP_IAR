@@ -5,15 +5,17 @@ All function define inital setting file for Nuvoton MS51 32K series
 --------------------------------------------------------------------------*/
 #define BIT __no_init bool __bit
 
-#define _nop_()  asm("nop") 
+
 /* Convert To IAR: #define nop _nop_ */
-#define nop _nop_();            ((UINT8)((v1)>>8))   
+#define _nop_()        asm("nop") 
+#define nop            asm("nop")
+#define CALL_NOP       asm("nop")
 
 /* Convert To IAR: push pop SFRS */
 #define _push_(SFRS)   asm(" PUSH 0x91")
 #define _pop_(SFRS)    asm(" POP 0x91")
-
-#define BIT __no_init bool __bit 
+#define PUSH_SFRS      asm(" PUSH 0x91")
+#define POP_SFRS       asm(" POP 0x91")
 
 #define Disable  0
 #define Enable   1

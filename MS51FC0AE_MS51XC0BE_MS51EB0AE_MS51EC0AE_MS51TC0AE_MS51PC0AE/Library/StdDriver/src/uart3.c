@@ -7,15 +7,26 @@
 #include "ms51_32k_iar.h"
 
 
-unsigned char uart3rvbuffer=0;
-unsigned char  uart3rvflag;
+unsigned char uart3rvbuffer;
+BIT  uart3rvflag;
 
+/**
+ * @brief       SC1 / UART3 interrupt vector demo
+ * @param       None
+ * @return      None
+ * @details     UART3 store received data.
+ */
+#if 0
 #pragma vector=0xB3
 __interrupt void SC1_ISR(void){
-  
+    PUSH_SFRS;  
         uart3rvflag = 1;
+        SFRS=2;
         uart3rvbuffer = SC1DR;
+    POP_SFRS;
 }
+#endif
+
 /**
  * @brief       UART3 transfer data without interrupt 
  * @param       u32SysClock , define Fsys value(value)

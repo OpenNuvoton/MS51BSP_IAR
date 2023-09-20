@@ -22,7 +22,7 @@
 #pragma vector=0x0B
 __interrupt void INT0_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
 
     SFRS = 0;
     TH1 = TH1_INIT;
@@ -30,7 +30,7 @@ __interrupt void INT0_ISR(void){
     TF1 = 0 ;
     GPIO_LED ^= 1;                              // LEDR1 toggle when interrupt
   
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 /************************************************************************************************************

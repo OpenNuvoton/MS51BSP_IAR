@@ -56,7 +56,6 @@ void WKT_AutoReload_Interrupt_Initial_MS(unsigned int u16WKTRLData)
 
 /**
  * @brief       Wakeup time setting 
- * @param       u8WKTCLKSouce clock source select define (LIRC / LXT)
  * @param       u16WKTDIV WKT counter divider select  (1/4/16/64/256/512/1024/2048)
  * @param       u8WKTRLData reload counter value(Value < 256) 
  * @return      none
@@ -97,12 +96,15 @@ void WKT_Interrupt(unsigned char u8WKTINT)
     }
 }
 
-//****************************************************************************************************************  
-//**** WKT close   
-//**** 1. Disable WKT 
-//**** 2. clear WKT reload counter 
-//**** 3. return WKT current counter value
-void WKT_Close()
+/**
+ * @brief       Wakeup Disable 
+ * @param       none
+ * @return      none
+ * @note        Also disable WKT interrupt
+ * @example     WKT_Close ();
+ */
+void WKT_Close(void)
 {
     clr_WKCON_WKTR;
+	DISABLE_WKT_INTERRUPT;
 }

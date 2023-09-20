@@ -24,12 +24,12 @@ unsigned char ADC_CONT_FINAL_FLAG=0;
 #pragma vector=0x5B
 __interrupt void ADC_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
 
     clr_ADCCON0_ADCF;
     ADC_CONT_FINAL_FLAG = 1;
 
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 /**
@@ -79,11 +79,11 @@ void main (void)
             {
               temp=(ResultTable[i]<<4)+(ResultTable[i/2+128]&0x0F);
               SFRS = 0;
-              printf(" \n\r  ADC No.%BD",i);
+              printf(" \n\r  ADC No.%hd",i);
               printf(" = 0x%x ", temp);
               i++;
               temp=(ResultTable[i]<<4)+((ResultTable[(i-1)/2+128]>>4)&0x0F);
-              printf(" \n\r  ADC No.%BD",i);
+              printf(" \n\r  ADC No.%hd",i);
               printf(" = 0x%x ", temp);
               if(i==127)
               ADC_CONT_FINAL_FLAG=0;

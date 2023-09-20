@@ -35,10 +35,10 @@ extern __data volatile uint8_t count;
 extern __data volatile uint16_t g_timer0Counter;
 extern __data volatile uint32_t g_checksum;
 extern __data volatile uint32_t g_totalchecksum;
-extern __data volatile uint8_t bUartDataReady;
-extern __data volatile uint8_t g_timer0Over;
-extern __data volatile uint8_t g_timer1Over;
-extern __data volatile uint8_t g_programflag;
+extern BIT bUartDataReady;
+extern BIT g_timer0Over;
+extern BIT g_timer1Over;
+extern BIT g_programflag;
 extern BIT BIT_TMP;
 
 extern unsigned char PID_highB,PID_lowB,DID_highB,DID_lowB,CONF0,CONF1,CONF2,CONF4;

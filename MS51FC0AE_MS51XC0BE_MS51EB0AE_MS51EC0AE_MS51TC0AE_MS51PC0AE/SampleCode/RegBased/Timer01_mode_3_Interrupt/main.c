@@ -25,25 +25,25 @@
 #pragma vector=0x0B
 __interrupt void Timer0_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
               
     TL0 = TL0_INIT;                              
     TF0=0;
   
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 #pragma vector=0x1B
 __interrupt void Timer1_ISR(void){
   
-    _push_(SFRS);
+    PUSH_SFRS;
 
     SFRS = 0;
     TH0 = TH0_INIT;
     TF1=0;
     GPIO_LED ^= 1;
   
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 /************************************************************************************************************

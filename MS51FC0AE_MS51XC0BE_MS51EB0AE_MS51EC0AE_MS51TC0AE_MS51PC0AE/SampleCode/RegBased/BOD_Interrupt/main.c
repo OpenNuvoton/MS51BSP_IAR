@@ -14,12 +14,12 @@ BIT bodflag;
 
 #pragma vector=0x43
 __interrupt void BOD_ISR(void){
-    _push_(SFRS);
+    PUSH_SFRS;
  
     clr_BODCON0_BOF;
     bodflag=1;
 
-    _pop_(SFRS);
+    POP_SFRS;
 }
 
 //----------------------------------------------------------------------------------------------//
